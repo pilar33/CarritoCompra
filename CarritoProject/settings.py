@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
+    #'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_bootstrap5',
     'CarritoApp',
+    'loguinApp',
 ]
 
 MIDDLEWARE = [
@@ -131,6 +132,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_REDIRECT_URL='Home'
+LOGOUT_REDIRECT_URL='Home'
+
 
 # JAZZMIN_SETTINGS = {
 #     # title of the window (Will default to current_admin_site.site_title if absent or None)
