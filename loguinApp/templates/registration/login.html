@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<div class="mb-3 row">
 <form action="" method="post">
     {% csrf_token %}
     <div class="mb-3">
@@ -17,6 +18,7 @@
       <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
 
-  {%endblock content%}
+  </form>
+</div>
+{%endblock content%}
