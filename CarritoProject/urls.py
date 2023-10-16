@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('tienda/', include('CarritoApp.urls')),
      path('', include('loguinApp.urls')),
+     path('crud/', include('django_dyn_dt.urls')),
 ]
