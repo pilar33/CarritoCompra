@@ -1,5 +1,5 @@
 from django.contrib import admin
-from CarritoApp.models import Empleados, TipoEmpleado, TipoProductos, Productos
+from CarritoApp.models import Empleados, TipoEmpleado, TipoProductos, Productos, Sucursales
 
 
 # Register your models here.
@@ -46,3 +46,7 @@ class TipoProductosAdmin(admin.ModelAdmin):
 class ProductosAdmin(admin.ModelAdmin):
     list_display = ["iidtipoproducto","snombreproducto","sdescripcion","istock","dprecio","surl"]
 
+
+@admin.register(Sucursales)
+class SucursalesAdmin(admin.ModelAdmin):
+    list_display = ["snombre"]

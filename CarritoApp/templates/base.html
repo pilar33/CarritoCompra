@@ -10,6 +10,7 @@
         <!-- {% bootstrap_messages %}  -->
         {% load static %}
     <title>Bootstrap demo</title>
+    <link href="{% static 'DataTables/DataTables-1.13.6/css/dataTables.bootstrap5.css' %}" rel="stylesheet">
   </head>
   <body>
     <div class="container">      
@@ -17,15 +18,13 @@
     {% block content %}
 
     {% endblock content %}
-  </div>
-     <!-- begin: opcional a bootstrap_messages, ver Displaying messages -->
-      <!-- {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-      {% endif %} -->
-      <!-- end: opcional a bootstrap_messages, ver Displaying messages -->
-  </body>
+  </div> 
+  <script src="{% static 'DataTables/jQuery-3.7.0/jquery-3.7.0.js' %}"></script>  
+  <script src="{% static 'DataTables/DataTables-1.13.6/js/jquery.dataTables.js' %}"></script>
+  <!-- <script src="{% static 'DataTables/datatables.min.js' %}"></script>   -->
+  <script src="{% static 'DataTables/DataTables-1.13.6/js/dataTables.bootstrap5.js' %}"></script>  
+</body>
+{% block javascript %}
+
+{% endblock javascript %}
 </html>

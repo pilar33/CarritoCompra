@@ -1,37 +1,31 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout
-
-from django.shortcuts import render
+from django.contrib.auth.views import LoginView
+from .forms import CustomLoginForm, CustomUserCreationForm  # Asegúrate de importar tu formulario personalizado
 from django.contrib.auth import authenticate, login
-from django.http import HttpResponseRedirect
-from django.urls import reverse
 
-# Create your views here.
+class CustomLoginView(LoginView):
+    login_form = CustomLoginForm  # Utiliza tu formulario personalizado
+    login_template = 'registration/login.html'  # Ruta a tu plantilla de inicio de sesión
 
 def home(request):
     return render(request,'home.html')
 
-# def loguin(request):
-#     return render(request,'login.html')
+def register(request):
+   data = {
+        'form': CustomUserCreationForm()
+    }
+    #validar los campos que vienen del form de register
+   if request.method == 'POST':
+        user_creation_form = CustomUserCreationForm(data=request.POST)
+        if user_creation_form.is_valid():
+            user_creation_form.save()
 
-# def custom_login(request):
-#     error_message = None
-
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#         user = authenticate(request, username=username, password=password)
-
-#         if user is not None:
-#             login(request, user)
-#             return HttpResponseRedirect(reverse('home'))  # Redirigir al usuario a la página de inicio
-#         else:
-#             error_message = "Credenciales incorrectas"
-
-#     return render(request, 'login.html', {'error_message': error_message})
-
-
-def exit(request):
-    logout(request)
-    return redirect('Home')
+            #usuario que se registra quede logueado, capturo los valores del form
+            user = authenticate(username=user_creation_form.cleaned_data['username'], password=user_creation_form.cleaned_data['password1'])
+            login(request, user)
+            return redirect('Home')
+        else:
+            data['form'] = user_creation_form
+            
+   return render(request,'registration/register.html', data)
 
