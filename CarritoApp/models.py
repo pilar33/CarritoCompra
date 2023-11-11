@@ -6,6 +6,9 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from django.contrib.auth.models import User
+from django.utils import timezone
+
 
 
 class AuthGroup(models.Model):
@@ -76,22 +79,46 @@ class AuthUserUserPermissions(models.Model):
         db_table = 'auth_user_user_permissions'
         unique_together = (('user', 'permission'),)
 
+class TipoMovimiento(models.Model):
+    iidtipomovimiento = models.BigAutoField(db_column='iIdTipoMovimiento', primary_key=True)  # Field name made lowercase.
+    stipomovimiento = models.CharField(db_column='sTipoMovimiento', max_length=191)  # Field name made lowercase.
+
+    def __str__(self):
+        return self.stipomovimiento
+    
+    class Meta:
+        managed = False
+        db_table = 'tipo_movimiento'
 
 class Cajas(models.Model):
     iidcaja = models.BigAutoField(db_column='iIdCaja', primary_key=True)  # Field name made lowercase.
     inrocaja = models.IntegerField(db_column='iNroCaja')  # Field name made lowercase.
-    dfechaapertura = models.DateTimeField(db_column='dFechaApertura')  # Field name made lowercase.
-    dfechacierre = models.DateTimeField(db_column='dFechaCierre')  # Field name made lowercase.
+    dfechaapertura = models.DateTimeField(db_column='dFechaApertura',default=timezone.now, blank=False, null=False)  # Field name made lowercase.
+    dfechacierre = models.DateTimeField(db_column='dFechaCierre', blank=True, null=True)  # Field name made lowercase.
     fmontoapertura = models.DecimalField(db_column='fMontoApertura', max_digits=8, decimal_places=2)  # Field name made lowercase.
-    fmontocierre = models.DecimalField(db_column='fMontoCierre', max_digits=8, decimal_places=2)  # Field name made lowercase.
+    fmontocierre = models.DecimalField(db_column='fMontoCierre', max_digits=8, decimal_places=2, null=True)  # Field name made lowercase.
     iidempleado = models.ForeignKey('Empleados', models.DO_NOTHING, db_column='iIdEmpleado')  # Field name made lowercase.
     iidsucursal = models.ForeignKey('Sucursales', models.DO_NOTHING, db_column='iIdSucursal')  # Field name made lowercase.
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    iidtipomovimiento = models.ForeignKey('TipoMovimiento', models.DO_NOTHING, db_column='iIdTipoMovimiento', default=1) 
+    created_at = models.DateTimeField(default=timezone.now,blank=True, null=True)
+    updated_at = models.DateTimeField(default=timezone.now,blank=True, null=True)
+    sobservaciones = models.CharField(db_column='sObservaciones', max_length=2000, default='')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'cajas'
+
+class TipoCliente(models.Model):
+    iidtipocliente = models.BigAutoField(db_column='iIdTipoCliente', primary_key=True)  # Field name made lowercase.
+    stipocliente = models.CharField(db_column='sTipoCliente', max_length=191)  # Field name made lowercase.
+
+    def __str__(self):
+        return self.stipocliente
+    
+    class Meta:
+        managed = False
+        db_table = 'tipo_cliente'
+
 
 
 class Clientes(models.Model):
@@ -102,6 +129,8 @@ class Clientes(models.Model):
     iidestado = models.IntegerField(db_column='iIdEstado')  # Field name made lowercase.
     semail = models.CharField(db_column='sEmail', max_length=50)  # Field name made lowercase.
     stelefono = models.CharField(db_column='sTelefono', max_length=15)  # Field name made lowercase.
+    iidtipocliente = models.ForeignKey('TipoCliente', models.DO_NOTHING, db_column='iIdTipoCliente', null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
     updated_at = models.DateTimeField(blank=True, null=True)
 
@@ -192,6 +221,7 @@ class Empleados(models.Model):
     iidtipoempleado = models.ForeignKey('TipoEmpleado', models.DO_NOTHING, db_column='iIdTipoEmpleado')  # Field name made lowercase.
     created_at = models.DateTimeField(blank=True, null=True)
     updated_at = models.DateTimeField(blank=True, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     class Meta:
         managed = False
@@ -216,17 +246,17 @@ class Pedidos(models.Model):
     inropedido = models.IntegerField(db_column='iNroPedido')  # Field name made lowercase.
     dfechapedido = models.DateTimeField(db_column='dFechaPedido')  # Field name made lowercase.
     iidestado = models.IntegerField(db_column='iIdEstado')  # Field name made lowercase.
-    iidcliente = models.ForeignKey(Clientes, models.DO_NOTHING, db_column='iIdCliente')  # Field name made lowercase.
+    iidcliente = models.ForeignKey(Clientes, models.DO_NOTHING, db_column='iIdCliente',null=True)  # Field name made lowercase.
     iidtipopedido = models.ForeignKey('TipoPedidos', models.DO_NOTHING, db_column='iIdTipoPedido')  # Field name made lowercase.
-    iidempleado = models.ForeignKey(Empleados, models.DO_NOTHING, db_column='iIdEmpleado')  # Field name made lowercase.
-    iidmesa = models.ForeignKey(Mesas, models.DO_NOTHING, db_column='iIdMesa')  # Field name made lowercase.
+    iidempleado = models.ForeignKey(Empleados, models.DO_NOTHING, db_column='iIdEmpleado',null=True)  # Field name made lowercase.
+    iidmesa = models.ForeignKey(Mesas, models.DO_NOTHING, db_column='iIdMesa',null=True)  # Field name made lowercase.
+    itotal = models.IntegerField(db_column='iTotal')
     created_at = models.DateTimeField(blank=True, null=True)
     updated_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'pedidos'
-
 
 class Productos(models.Model):
     iidproducto = models.BigAutoField(db_column='iIdProducto', primary_key=True)  # Field name made lowercase.
@@ -240,10 +270,22 @@ class Productos(models.Model):
     created_at = models.DateTimeField(blank=True, null=True)
     updated_at = models.DateTimeField(blank=True, null=True)
 
+    def __str__(self):
+        return self.snombreproducto
+
     class Meta:
         managed = False
         db_table = 'productos'
 
+class DetallePedidos(models.Model):
+    iiddetallepedido = models.BigAutoField(db_column='iIdDetallePedido', primary_key=True)  # Field name made lowercase.
+    iidpedido = models.ForeignKey(Pedidos, models.DO_NOTHING, db_column='iIdPedido',null=True)
+    iidproducto = models.ForeignKey(Productos, models.DO_NOTHING, db_column='iIdProducto')
+    icantidad = models.IntegerField(db_column='iCantidad')  # Field name made lowercase.
+    precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)
+    class Meta:
+        managed = False
+        db_table = 'detallepedidos'
 
 class Sucursales(models.Model):
     iidsucursal = models.BigAutoField(db_column='iIdSucursal', primary_key=True)  # Field name made lowercase.
@@ -251,7 +293,10 @@ class Sucursales(models.Model):
     iidestado = models.IntegerField(db_column='iIdEstado')  # Field name made lowercase.
     created_at = models.DateTimeField(blank=True, null=True)
     updated_at = models.DateTimeField(blank=True, null=True)
-
+    
+    def __str__(self):
+        return self.snombre
+    
     class Meta:
         managed = False
         db_table = 'sucursales'

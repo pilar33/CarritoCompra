@@ -1,12 +1,16 @@
 from .Carrito import Carrito
-from CarritoApp.models import Productos
+from CarritoApp.models import Productos, DetallePedidos
 from django.views.generic import TemplateView
 from loguinApp.mixins import AuthGroupRequiredMixin
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.views.decorators.http import require_http_methods
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse_lazy
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from io import BytesIO
 ###########begin debugg consola###################
 
 # se importa solo pra mostrar los logger en la consola de ejecucion
@@ -36,11 +40,11 @@ class tienda(AuthGroupRequiredMixin, TemplateView):
     #logger.debug("Entrando al método dispatch")
     #@method_decorator(user_passes_test(usuario_puede_modificar_carrito, login_url=reverse_lazy('login')))
     def dispatch(self, request, *args, **kwargs):
-        logger.debug("Entrando al método dispatch")
+        #logger.debug("Entrando al método dispatch")
         user = self.request.user
-        logger.debug(f"Grupos del usuario: {user.groups.all()}")
+        #logger.debug(f"Grupos del usuario: {user.groups.all()}")
         result = super().dispatch(request, *args, **kwargs)
-        logger.debug("Saliendo del método dispatch")
+        #logger.debug("Saliendo del método dispatch")
         return result
     
     #######end: codigo necesario solo para ver la salida del mixins en consola####
@@ -79,3 +83,49 @@ def limpiar_carrito(request):
     carrito = Carrito(request)
     carrito.limpiar()
     return redirect("Tienda")
+
+# def render_pdf(template_path, context_dict):
+#     template = get_template(template_path)
+#     html = template.render(context_dict)
+#     response = HttpResponse(content_type='application/pdf')
+#     response['Content-Disposition'] = 'attachment; filename="comprobante_venta.pdf"'
+
+#     # Crear el PDF a partir de la plantilla HTML
+#     pisa.CreatePDF(html, dest=response)
+#     return response
+def render_pdf(template_path, context_dict):
+    template = get_template(template_path)
+    html = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), result, encoding="UTF-8")
+
+    if not pdf.err:
+        response = HttpResponse(result.getvalue(), content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="comprobante_venta.pdf"'
+        return response
+
+    return HttpResponse("Error al generar el PDF", content_type='text/plain')
+
+def confirmar_pedido(request):
+    carrito = Carrito(request)
+    pedido = carrito.crear_pedido(request.user)  # Crear el pedido y recibirlo
+    detalle_pedido = DetallePedidos.objects.filter(iidpedido=pedido)  # Obtener detalles del pedido
+    total = 0  # Inicializa una variable para el total
+
+    for detalle in detalle_pedido:
+        detalle.acumulado = detalle.icantidad * detalle.precio_unitario
+        total += detalle.acumulado
+    
+    contexto = {
+        'pedido': pedido,
+        'detalle_pedido': detalle_pedido,
+        'total': total,
+    }
+    # Llama a la función render_pdf para generar el PDF
+    pdf = render_pdf('comprobante_venta.html', contexto)
+    return pdf
+
+    # Renderiza la página HTML usando la función render
+    #return render(request, 'comprobante_venta.html', contexto)
+    
+    
