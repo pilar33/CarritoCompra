@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-10-2023 a las 16:31:53
+-- Tiempo de generación: 11-11-2023 a las 22:26:53
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.1.12
 
@@ -30,17 +30,16 @@ SET time_zone = "+00:00";
 CREATE TABLE `auth_group` (
   `id` int(11) NOT NULL,
   `name` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `auth_group`
 --
 
 INSERT INTO `auth_group` (`id`, `name`) VALUES
-(4, 'Administrador'),
+(1, 'Administrador'),
 (3, 'Operador'),
-(1, 'Usuario'),
-(2, 'visitante');
+(2, 'Usuario');
 
 -- --------------------------------------------------------
 
@@ -52,17 +51,7 @@ CREATE TABLE `auth_group_permissions` (
   `id` bigint(20) NOT NULL,
   `group_id` int(11) NOT NULL,
   `permission_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `auth_group_permissions`
---
-
-INSERT INTO `auth_group_permissions` (`id`, `group_id`, `permission_id`) VALUES
-(2, 1, 197),
-(3, 1, 198),
-(4, 1, 199),
-(1, 1, 200);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -75,237 +64,145 @@ CREATE TABLE `auth_permission` (
   `name` varchar(255) NOT NULL,
   `content_type_id` int(11) NOT NULL,
   `codename` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `auth_permission`
 --
 
 INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALUES
-(1, 'Can add log entry', 1, 'add_logentry'),
-(2, 'Can change log entry', 1, 'change_logentry'),
-(3, 'Can delete log entry', 1, 'delete_logentry'),
-(4, 'Can view log entry', 1, 'view_logentry'),
-(5, 'Can add permission', 2, 'add_permission'),
-(6, 'Can change permission', 2, 'change_permission'),
-(7, 'Can delete permission', 2, 'delete_permission'),
-(8, 'Can view permission', 2, 'view_permission'),
-(9, 'Can add group', 3, 'add_group'),
-(10, 'Can change group', 3, 'change_group'),
-(11, 'Can delete group', 3, 'delete_group'),
-(12, 'Can view group', 3, 'view_group'),
-(13, 'Can add user', 4, 'add_user'),
-(14, 'Can change user', 4, 'change_user'),
-(15, 'Can delete user', 4, 'delete_user'),
-(16, 'Can view user', 4, 'view_user'),
-(17, 'Can add content type', 5, 'add_contenttype'),
-(18, 'Can change content type', 5, 'change_contenttype'),
-(19, 'Can delete content type', 5, 'delete_contenttype'),
-(20, 'Can view content type', 5, 'view_contenttype'),
+(1, 'Can add content type', 1, 'add_contenttype'),
+(2, 'Can change content type', 1, 'change_contenttype'),
+(3, 'Can delete content type', 1, 'delete_contenttype'),
+(4, 'Can view content type', 1, 'view_contenttype'),
+(5, 'Can add log entry', 2, 'add_logentry'),
+(6, 'Can change log entry', 2, 'change_logentry'),
+(7, 'Can delete log entry', 2, 'delete_logentry'),
+(8, 'Can view log entry', 2, 'view_logentry'),
+(9, 'Can add permission', 3, 'add_permission'),
+(10, 'Can change permission', 3, 'change_permission'),
+(11, 'Can delete permission', 3, 'delete_permission'),
+(12, 'Can view permission', 3, 'view_permission'),
+(13, 'Can add group', 4, 'add_group'),
+(14, 'Can change group', 4, 'change_group'),
+(15, 'Can delete group', 4, 'delete_group'),
+(16, 'Can view group', 4, 'view_group'),
+(17, 'Can add user', 5, 'add_user'),
+(18, 'Can change user', 5, 'change_user'),
+(19, 'Can delete user', 5, 'delete_user'),
+(20, 'Can view user', 5, 'view_user'),
 (21, 'Can add session', 6, 'add_session'),
 (22, 'Can change session', 6, 'change_session'),
 (23, 'Can delete session', 6, 'delete_session'),
 (24, 'Can view session', 6, 'view_session'),
-(25, 'Can add auth group', 9, 'add_authgroup'),
-(26, 'Can change auth group', 9, 'change_authgroup'),
-(27, 'Can delete auth group', 9, 'delete_authgroup'),
-(28, 'Can view auth group', 9, 'view_authgroup'),
-(29, 'Can add auth group permissions', 10, 'add_authgrouppermissions'),
-(30, 'Can change auth group permissions', 10, 'change_authgrouppermissions'),
-(31, 'Can delete auth group permissions', 10, 'delete_authgrouppermissions'),
-(32, 'Can view auth group permissions', 10, 'view_authgrouppermissions'),
-(33, 'Can add auth permission', 11, 'add_authpermission'),
-(34, 'Can change auth permission', 11, 'change_authpermission'),
-(35, 'Can delete auth permission', 11, 'delete_authpermission'),
-(36, 'Can view auth permission', 11, 'view_authpermission'),
-(37, 'Can add auth user', 12, 'add_authuser'),
-(38, 'Can change auth user', 12, 'change_authuser'),
-(39, 'Can delete auth user', 12, 'delete_authuser'),
-(40, 'Can view auth user', 12, 'view_authuser'),
-(41, 'Can add auth user groups', 13, 'add_authusergroups'),
-(42, 'Can change auth user groups', 13, 'change_authusergroups'),
-(43, 'Can delete auth user groups', 13, 'delete_authusergroups'),
-(44, 'Can view auth user groups', 13, 'view_authusergroups'),
-(45, 'Can add auth user user permissions', 14, 'add_authuseruserpermissions'),
-(46, 'Can change auth user user permissions', 14, 'change_authuseruserpermissions'),
-(47, 'Can delete auth user user permissions', 14, 'delete_authuseruserpermissions'),
-(48, 'Can view auth user user permissions', 14, 'view_authuseruserpermissions'),
-(49, 'Can add django admin log', 15, 'add_djangoadminlog'),
-(50, 'Can change django admin log', 15, 'change_djangoadminlog'),
-(51, 'Can delete django admin log', 15, 'delete_djangoadminlog'),
-(52, 'Can view django admin log', 15, 'view_djangoadminlog'),
-(53, 'Can add django content type', 16, 'add_djangocontenttype'),
-(54, 'Can change django content type', 16, 'change_djangocontenttype'),
-(55, 'Can delete django content type', 16, 'delete_djangocontenttype'),
-(56, 'Can view django content type', 16, 'view_djangocontenttype'),
-(57, 'Can add django migrations', 17, 'add_djangomigrations'),
-(58, 'Can change django migrations', 17, 'change_djangomigrations'),
-(59, 'Can delete django migrations', 17, 'delete_djangomigrations'),
-(60, 'Can view django migrations', 17, 'view_djangomigrations'),
-(61, 'Can add django session', 18, 'add_djangosession'),
-(62, 'Can change django session', 18, 'change_djangosession'),
-(63, 'Can delete django session', 18, 'delete_djangosession'),
-(64, 'Can view django session', 18, 'view_djangosession'),
-(65, 'Can add empleados', 19, 'add_empleados'),
-(66, 'Can change empleados', 19, 'change_empleados'),
-(67, 'Can delete empleados', 19, 'delete_empleados'),
-(68, 'Can view empleados', 19, 'view_empleados'),
-(69, 'Can add cajas', 22, 'add_cajas'),
-(70, 'Can change cajas', 22, 'change_cajas'),
-(71, 'Can delete cajas', 22, 'delete_cajas'),
-(72, 'Can view cajas', 22, 'view_cajas'),
-(73, 'Can add clientes', 23, 'add_clientes'),
-(74, 'Can change clientes', 23, 'change_clientes'),
-(75, 'Can delete clientes', 23, 'delete_clientes'),
-(76, 'Can view clientes', 23, 'view_clientes'),
-(77, 'Can add comprobantes', 24, 'add_comprobantes'),
-(78, 'Can change comprobantes', 24, 'change_comprobantes'),
-(79, 'Can delete comprobantes', 24, 'delete_comprobantes'),
-(80, 'Can view comprobantes', 24, 'view_comprobantes'),
-(81, 'Can add comprobante ventas', 25, 'add_comprobanteventas'),
-(82, 'Can change comprobante ventas', 25, 'change_comprobanteventas'),
-(83, 'Can delete comprobante ventas', 25, 'delete_comprobanteventas'),
-(84, 'Can view comprobante ventas', 25, 'view_comprobanteventas'),
-(85, 'Can add mesas', 26, 'add_mesas'),
-(86, 'Can change mesas', 26, 'change_mesas'),
-(87, 'Can delete mesas', 26, 'delete_mesas'),
-(88, 'Can view mesas', 26, 'view_mesas'),
-(89, 'Can add pedidos', 27, 'add_pedidos'),
-(90, 'Can change pedidos', 27, 'change_pedidos'),
-(91, 'Can delete pedidos', 27, 'delete_pedidos'),
-(92, 'Can view pedidos', 27, 'view_pedidos'),
-(93, 'Can add productos', 28, 'add_productos'),
-(94, 'Can change productos', 28, 'change_productos'),
-(95, 'Can delete productos', 28, 'delete_productos'),
-(96, 'Can view productos', 28, 'view_productos'),
-(97, 'Can add sucursales', 29, 'add_sucursales'),
-(98, 'Can change sucursales', 29, 'change_sucursales'),
-(99, 'Can delete sucursales', 29, 'delete_sucursales'),
-(100, 'Can view sucursales', 29, 'view_sucursales'),
-(101, 'Can add tipo comprobante', 30, 'add_tipocomprobante'),
-(102, 'Can change tipo comprobante', 30, 'change_tipocomprobante'),
-(103, 'Can delete tipo comprobante', 30, 'delete_tipocomprobante'),
-(104, 'Can view tipo comprobante', 30, 'view_tipocomprobante'),
-(105, 'Can add tipo empleado', 21, 'add_tipoempleado'),
-(106, 'Can change tipo empleado', 21, 'change_tipoempleado'),
-(107, 'Can delete tipo empleado', 21, 'delete_tipoempleado'),
-(108, 'Can view tipo empleado', 21, 'view_tipoempleado'),
-(109, 'Can add tipo pedidos', 31, 'add_tipopedidos'),
-(110, 'Can change tipo pedidos', 31, 'change_tipopedidos'),
-(111, 'Can delete tipo pedidos', 31, 'delete_tipopedidos'),
-(112, 'Can view tipo pedidos', 31, 'view_tipopedidos'),
-(113, 'Can add tipo productos', 20, 'add_tipoproductos'),
-(114, 'Can change tipo productos', 20, 'change_tipoproductos'),
-(115, 'Can delete tipo productos', 20, 'delete_tipoproductos'),
-(116, 'Can view tipo productos', 20, 'view_tipoproductos'),
-(117, 'Can add ventas', 32, 'add_ventas'),
-(118, 'Can change ventas', 32, 'change_ventas'),
-(119, 'Can delete ventas', 32, 'delete_ventas'),
-(120, 'Can view ventas', 32, 'view_ventas'),
-(121, 'Can add productos', 33, 'add_productos'),
-(122, 'Can change productos', 33, 'change_productos'),
-(123, 'Can delete productos', 33, 'delete_productos'),
-(124, 'Can view productos', 33, 'view_productos'),
-(125, 'Can add tipo productos', 34, 'add_tipoproductos'),
-(126, 'Can change tipo productos', 34, 'change_tipoproductos'),
-(127, 'Can delete tipo productos', 34, 'delete_tipoproductos'),
-(128, 'Can view tipo productos', 34, 'view_tipoproductos'),
-(129, 'Can add auth group', 35, 'add_authgroup'),
-(130, 'Can change auth group', 35, 'change_authgroup'),
-(131, 'Can delete auth group', 35, 'delete_authgroup'),
-(132, 'Can view auth group', 35, 'view_authgroup'),
-(133, 'Can add auth group permissions', 36, 'add_authgrouppermissions'),
-(134, 'Can change auth group permissions', 36, 'change_authgrouppermissions'),
-(135, 'Can delete auth group permissions', 36, 'delete_authgrouppermissions'),
-(136, 'Can view auth group permissions', 36, 'view_authgrouppermissions'),
-(137, 'Can add auth permission', 37, 'add_authpermission'),
-(138, 'Can change auth permission', 37, 'change_authpermission'),
-(139, 'Can delete auth permission', 37, 'delete_authpermission'),
-(140, 'Can view auth permission', 37, 'view_authpermission'),
-(141, 'Can add auth user', 38, 'add_authuser'),
-(142, 'Can change auth user', 38, 'change_authuser'),
-(143, 'Can delete auth user', 38, 'delete_authuser'),
-(144, 'Can view auth user', 38, 'view_authuser'),
-(145, 'Can add auth user groups', 39, 'add_authusergroups'),
-(146, 'Can change auth user groups', 39, 'change_authusergroups'),
-(147, 'Can delete auth user groups', 39, 'delete_authusergroups'),
-(148, 'Can view auth user groups', 39, 'view_authusergroups'),
-(149, 'Can add auth user user permissions', 40, 'add_authuseruserpermissions'),
-(150, 'Can change auth user user permissions', 40, 'change_authuseruserpermissions'),
-(151, 'Can delete auth user user permissions', 40, 'delete_authuseruserpermissions'),
-(152, 'Can view auth user user permissions', 40, 'view_authuseruserpermissions'),
-(153, 'Can add cajas', 41, 'add_cajas'),
-(154, 'Can change cajas', 41, 'change_cajas'),
-(155, 'Can delete cajas', 41, 'delete_cajas'),
-(156, 'Can view cajas', 41, 'view_cajas'),
-(157, 'Can add clientes', 42, 'add_clientes'),
-(158, 'Can change clientes', 42, 'change_clientes'),
-(159, 'Can delete clientes', 42, 'delete_clientes'),
-(160, 'Can view clientes', 42, 'view_clientes'),
-(161, 'Can add comprobantes', 43, 'add_comprobantes'),
-(162, 'Can change comprobantes', 43, 'change_comprobantes'),
-(163, 'Can delete comprobantes', 43, 'delete_comprobantes'),
-(164, 'Can view comprobantes', 43, 'view_comprobantes'),
-(165, 'Can add comprobante ventas', 44, 'add_comprobanteventas'),
-(166, 'Can change comprobante ventas', 44, 'change_comprobanteventas'),
-(167, 'Can delete comprobante ventas', 44, 'delete_comprobanteventas'),
-(168, 'Can view comprobante ventas', 44, 'view_comprobanteventas'),
-(169, 'Can add django admin log', 45, 'add_djangoadminlog'),
-(170, 'Can change django admin log', 45, 'change_djangoadminlog'),
-(171, 'Can delete django admin log', 45, 'delete_djangoadminlog'),
-(172, 'Can view django admin log', 45, 'view_djangoadminlog'),
-(173, 'Can add django content type', 46, 'add_djangocontenttype'),
-(174, 'Can change django content type', 46, 'change_djangocontenttype'),
-(175, 'Can delete django content type', 46, 'delete_djangocontenttype'),
-(176, 'Can view django content type', 46, 'view_djangocontenttype'),
-(177, 'Can add django migrations', 47, 'add_djangomigrations'),
-(178, 'Can change django migrations', 47, 'change_djangomigrations'),
-(179, 'Can delete django migrations', 47, 'delete_djangomigrations'),
-(180, 'Can view django migrations', 47, 'view_djangomigrations'),
-(181, 'Can add django session', 48, 'add_djangosession'),
-(182, 'Can change django session', 48, 'change_djangosession'),
-(183, 'Can delete django session', 48, 'delete_djangosession'),
-(184, 'Can view django session', 48, 'view_djangosession'),
-(185, 'Can add empleados', 49, 'add_empleados'),
-(186, 'Can change empleados', 49, 'change_empleados'),
-(187, 'Can delete empleados', 49, 'delete_empleados'),
-(188, 'Can view empleados', 49, 'view_empleados'),
-(189, 'Can add mesas', 50, 'add_mesas'),
-(190, 'Can change mesas', 50, 'change_mesas'),
-(191, 'Can delete mesas', 50, 'delete_mesas'),
-(192, 'Can view mesas', 50, 'view_mesas'),
-(193, 'Can add pedidos', 51, 'add_pedidos'),
-(194, 'Can change pedidos', 51, 'change_pedidos'),
-(195, 'Can delete pedidos', 51, 'delete_pedidos'),
-(196, 'Can view pedidos', 51, 'view_pedidos'),
-(197, 'Can add productos', 52, 'add_productos'),
-(198, 'Can change productos', 52, 'change_productos'),
-(199, 'Can delete productos', 52, 'delete_productos'),
-(200, 'Can view productos', 52, 'view_productos'),
-(201, 'Can add sucursales', 53, 'add_sucursales'),
-(202, 'Can change sucursales', 53, 'change_sucursales'),
-(203, 'Can delete sucursales', 53, 'delete_sucursales'),
-(204, 'Can view sucursales', 53, 'view_sucursales'),
-(205, 'Can add tipo comprobante', 54, 'add_tipocomprobante'),
-(206, 'Can change tipo comprobante', 54, 'change_tipocomprobante'),
-(207, 'Can delete tipo comprobante', 54, 'delete_tipocomprobante'),
-(208, 'Can view tipo comprobante', 54, 'view_tipocomprobante'),
-(209, 'Can add tipo empleado', 55, 'add_tipoempleado'),
-(210, 'Can change tipo empleado', 55, 'change_tipoempleado'),
-(211, 'Can delete tipo empleado', 55, 'delete_tipoempleado'),
-(212, 'Can view tipo empleado', 55, 'view_tipoempleado'),
-(213, 'Can add tipo pedidos', 56, 'add_tipopedidos'),
-(214, 'Can change tipo pedidos', 56, 'change_tipopedidos'),
-(215, 'Can delete tipo pedidos', 56, 'delete_tipopedidos'),
-(216, 'Can view tipo pedidos', 56, 'view_tipopedidos'),
-(217, 'Can add tipo productos', 57, 'add_tipoproductos'),
-(218, 'Can change tipo productos', 57, 'change_tipoproductos'),
-(219, 'Can delete tipo productos', 57, 'delete_tipoproductos'),
-(220, 'Can view tipo productos', 57, 'view_tipoproductos'),
-(221, 'Can add ventas', 58, 'add_ventas'),
-(222, 'Can change ventas', 58, 'change_ventas'),
-(223, 'Can delete ventas', 58, 'delete_ventas'),
-(224, 'Can view ventas', 58, 'view_ventas');
+(25, 'Can add auth group', 7, 'add_authgroup'),
+(26, 'Can change auth group', 7, 'change_authgroup'),
+(27, 'Can delete auth group', 7, 'delete_authgroup'),
+(28, 'Can view auth group', 7, 'view_authgroup'),
+(29, 'Can add auth group permissions', 8, 'add_authgrouppermissions'),
+(30, 'Can change auth group permissions', 8, 'change_authgrouppermissions'),
+(31, 'Can delete auth group permissions', 8, 'delete_authgrouppermissions'),
+(32, 'Can view auth group permissions', 8, 'view_authgrouppermissions'),
+(33, 'Can add auth permission', 9, 'add_authpermission'),
+(34, 'Can change auth permission', 9, 'change_authpermission'),
+(35, 'Can delete auth permission', 9, 'delete_authpermission'),
+(36, 'Can view auth permission', 9, 'view_authpermission'),
+(37, 'Can add auth user', 10, 'add_authuser'),
+(38, 'Can change auth user', 10, 'change_authuser'),
+(39, 'Can delete auth user', 10, 'delete_authuser'),
+(40, 'Can view auth user', 10, 'view_authuser'),
+(41, 'Can add auth user groups', 11, 'add_authusergroups'),
+(42, 'Can change auth user groups', 11, 'change_authusergroups'),
+(43, 'Can delete auth user groups', 11, 'delete_authusergroups'),
+(44, 'Can view auth user groups', 11, 'view_authusergroups'),
+(45, 'Can add auth user user permissions', 12, 'add_authuseruserpermissions'),
+(46, 'Can change auth user user permissions', 12, 'change_authuseruserpermissions'),
+(47, 'Can delete auth user user permissions', 12, 'delete_authuseruserpermissions'),
+(48, 'Can view auth user user permissions', 12, 'view_authuseruserpermissions'),
+(49, 'Can add django admin log', 13, 'add_djangoadminlog'),
+(50, 'Can change django admin log', 13, 'change_djangoadminlog'),
+(51, 'Can delete django admin log', 13, 'delete_djangoadminlog'),
+(52, 'Can view django admin log', 13, 'view_djangoadminlog'),
+(53, 'Can add django content type', 14, 'add_djangocontenttype'),
+(54, 'Can change django content type', 14, 'change_djangocontenttype'),
+(55, 'Can delete django content type', 14, 'delete_djangocontenttype'),
+(56, 'Can view django content type', 14, 'view_djangocontenttype'),
+(57, 'Can add django migrations', 15, 'add_djangomigrations'),
+(58, 'Can change django migrations', 15, 'change_djangomigrations'),
+(59, 'Can delete django migrations', 15, 'delete_djangomigrations'),
+(60, 'Can view django migrations', 15, 'view_djangomigrations'),
+(61, 'Can add django session', 16, 'add_djangosession'),
+(62, 'Can change django session', 16, 'change_djangosession'),
+(63, 'Can delete django session', 16, 'delete_djangosession'),
+(64, 'Can view django session', 16, 'view_djangosession'),
+(65, 'Can add cajas', 17, 'add_cajas'),
+(66, 'Can change cajas', 17, 'change_cajas'),
+(67, 'Can delete cajas', 17, 'delete_cajas'),
+(68, 'Can view cajas', 17, 'view_cajas'),
+(69, 'Can add clientes', 18, 'add_clientes'),
+(70, 'Can change clientes', 18, 'change_clientes'),
+(71, 'Can delete clientes', 18, 'delete_clientes'),
+(72, 'Can view clientes', 18, 'view_clientes'),
+(73, 'Can add comprobantes', 19, 'add_comprobantes'),
+(74, 'Can change comprobantes', 19, 'change_comprobantes'),
+(75, 'Can delete comprobantes', 19, 'delete_comprobantes'),
+(76, 'Can view comprobantes', 19, 'view_comprobantes'),
+(77, 'Can add empleados', 20, 'add_empleados'),
+(78, 'Can change empleados', 20, 'change_empleados'),
+(79, 'Can delete empleados', 20, 'delete_empleados'),
+(80, 'Can view empleados', 20, 'view_empleados'),
+(81, 'Can add mesas', 21, 'add_mesas'),
+(82, 'Can change mesas', 21, 'change_mesas'),
+(83, 'Can delete mesas', 21, 'delete_mesas'),
+(84, 'Can view mesas', 21, 'view_mesas'),
+(85, 'Can add sucursales', 22, 'add_sucursales'),
+(86, 'Can change sucursales', 22, 'change_sucursales'),
+(87, 'Can delete sucursales', 22, 'delete_sucursales'),
+(88, 'Can view sucursales', 22, 'view_sucursales'),
+(89, 'Can add tipo comprobante', 23, 'add_tipocomprobante'),
+(90, 'Can change tipo comprobante', 23, 'change_tipocomprobante'),
+(91, 'Can delete tipo comprobante', 23, 'delete_tipocomprobante'),
+(92, 'Can view tipo comprobante', 23, 'view_tipocomprobante'),
+(93, 'Can add tipo empleado', 24, 'add_tipoempleado'),
+(94, 'Can change tipo empleado', 24, 'change_tipoempleado'),
+(95, 'Can delete tipo empleado', 24, 'delete_tipoempleado'),
+(96, 'Can view tipo empleado', 24, 'view_tipoempleado'),
+(97, 'Can add tipo movimiento', 25, 'add_tipomovimiento'),
+(98, 'Can change tipo movimiento', 25, 'change_tipomovimiento'),
+(99, 'Can delete tipo movimiento', 25, 'delete_tipomovimiento'),
+(100, 'Can view tipo movimiento', 25, 'view_tipomovimiento'),
+(101, 'Can add tipo pedidos', 26, 'add_tipopedidos'),
+(102, 'Can change tipo pedidos', 26, 'change_tipopedidos'),
+(103, 'Can delete tipo pedidos', 26, 'delete_tipopedidos'),
+(104, 'Can view tipo pedidos', 26, 'view_tipopedidos'),
+(105, 'Can add tipo productos', 27, 'add_tipoproductos'),
+(106, 'Can change tipo productos', 27, 'change_tipoproductos'),
+(107, 'Can delete tipo productos', 27, 'delete_tipoproductos'),
+(108, 'Can view tipo productos', 27, 'view_tipoproductos'),
+(109, 'Can add ventas', 28, 'add_ventas'),
+(110, 'Can change ventas', 28, 'change_ventas'),
+(111, 'Can delete ventas', 28, 'delete_ventas'),
+(112, 'Can view ventas', 28, 'view_ventas'),
+(113, 'Can add productos', 29, 'add_productos'),
+(114, 'Can change productos', 29, 'change_productos'),
+(115, 'Can delete productos', 29, 'delete_productos'),
+(116, 'Can view productos', 29, 'view_productos'),
+(117, 'Can add pedidos', 30, 'add_pedidos'),
+(118, 'Can change pedidos', 30, 'change_pedidos'),
+(119, 'Can delete pedidos', 30, 'delete_pedidos'),
+(120, 'Can view pedidos', 30, 'view_pedidos'),
+(121, 'Can add detalle pedidos', 31, 'add_detallepedidos'),
+(122, 'Can change detalle pedidos', 31, 'change_detallepedidos'),
+(123, 'Can delete detalle pedidos', 31, 'delete_detallepedidos'),
+(124, 'Can view detalle pedidos', 31, 'view_detallepedidos'),
+(125, 'Can add comprobante ventas', 32, 'add_comprobanteventas'),
+(126, 'Can change comprobante ventas', 32, 'change_comprobanteventas'),
+(127, 'Can delete comprobante ventas', 32, 'delete_comprobanteventas'),
+(128, 'Can view comprobante ventas', 32, 'view_comprobanteventas'),
+(129, 'Can add tipo cliente', 33, 'add_tipocliente'),
+(130, 'Can change tipo cliente', 33, 'change_tipocliente'),
+(131, 'Can delete tipo cliente', 33, 'delete_tipocliente'),
+(132, 'Can view tipo cliente', 33, 'view_tipocliente');
 
 -- --------------------------------------------------------
 
@@ -325,16 +222,17 @@ CREATE TABLE `auth_user` (
   `is_staff` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `date_joined` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `auth_user`
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$600000$FGvGeECrpUtyG67zcMWoQ8$VjKECgsMDWHCXkoSINUMbxCYNR4+8Jwz7EEgG3BjA2U=', '2023-10-07 14:29:23.036786', 1, 'pilar', '', '', 'pilarcayo33@gmail.com', 1, 1, '2023-09-20 00:13:36.887144'),
-(2, 'pbkdf2_sha256$600000$kUXflYZgWZSCPLrsIjWJtR$XUIfYwKIN3Y9eQyy6+Oo+Jrwf4OJnYiKS3zO3vYESIc=', '2023-09-27 16:07:27.578128', 1, 'euge', '', '', 'pilarcayo33@gmail.com', 1, 1, '2023-09-27 15:55:05.500933'),
-(3, 'pbkdf2_sha256$600000$v3Sue8rPKNxtwVMiFD8Zei$/T+a5tMK8VcyKQ4LCKhHLe8X4/tRHUuHpiLpockl+Js=', NULL, 0, 'UserRegister', '', '', '', 0, 1, '2023-10-04 15:19:08.000000');
+(1, 'pbkdf2_sha256$600000$ToRSeAr45QhEFIf0LiBXhU$MFFfhOQOMuN3AqmYUJNrOEbaBHVwBcTiVp56ziA4mVk=', '2023-10-31 20:11:27.816994', 1, 'pilar', '', '', 'pilarcayo33@gmail.com', 1, 1, '2023-10-29 19:21:20.000000'),
+(2, 'pbkdf2_sha256$600000$7rs7Pu0C8sHZXxf21qbPof$RrAAQYFrk0MXWxkV2EtDYFWOliahSO/OFKWYsH/wVKY=', '2023-11-02 00:45:50.980746', 0, 'userEmpleado', 'Manuel', 'Escalante', 'administrator@brackets.sk', 0, 1, '2023-11-02 00:45:49.968899'),
+(3, 'pbkdf2_sha256$600000$72zDSKnMYnf1W2bJqpQ0jk$yzKZB1cTq9CH/TOfDibqi3q84t9HLShFzDc8eVcvjKo=', NULL, 0, 'userRegister', 'pilar', 'cayo', 'administrator@brackets.sk23', 0, 1, '2023-11-11 21:12:26.619143'),
+(4, 'pbkdf2_sha256$600000$gA1LBDywTI0U9VaaJN9uo4$LRru2wvjMk9qtvnpbWIS2pkseftHG7/2YcmJbGwDBBc=', '2023-11-11 21:15:42.485893', 0, 'userClaudia', 'pili', 'pililiu', 'isdmzoom10@gmail.com', 0, 1, '2023-11-11 21:15:41.497222');
 
 -- --------------------------------------------------------
 
@@ -346,14 +244,16 @@ CREATE TABLE `auth_user_groups` (
   `id` bigint(20) NOT NULL,
   `user_id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `auth_user_groups`
 --
 
 INSERT INTO `auth_user_groups` (`id`, `user_id`, `group_id`) VALUES
-(1, 3, 1);
+(1, 1, 1),
+(2, 2, 2),
+(3, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -365,7 +265,7 @@ CREATE TABLE `auth_user_user_permissions` (
   `id` bigint(20) NOT NULL,
   `user_id` int(11) NOT NULL,
   `permission_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -374,17 +274,28 @@ CREATE TABLE `auth_user_user_permissions` (
 --
 
 CREATE TABLE `cajas` (
-  `iIdCaja` bigint(20) UNSIGNED NOT NULL,
+  `iIdCaja` bigint(20) NOT NULL,
   `iNroCaja` int(11) NOT NULL,
-  `dFechaApertura` datetime NOT NULL,
-  `dFechaCierre` datetime NOT NULL,
+  `dFechaApertura` datetime(6) NOT NULL,
+  `dFechaCierre` datetime(6) DEFAULT NULL,
   `fMontoApertura` decimal(8,2) NOT NULL,
-  `fMontoCierre` decimal(8,2) NOT NULL,
-  `iIdEmpleado` bigint(20) UNSIGNED NOT NULL,
-  `iIdSucursal` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `fMontoCierre` decimal(8,2) DEFAULT NULL,
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
+  `sObservaciones` varchar(2000) NOT NULL,
+  `iIdEmpleado` bigint(20) NOT NULL,
+  `iIdSucursal` bigint(20) NOT NULL,
+  `iIdTipoMovimiento` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `cajas`
+--
+
+INSERT INTO `cajas` (`iIdCaja`, `iNroCaja`, `dFechaApertura`, `dFechaCierre`, `fMontoApertura`, `fMontoCierre`, `created_at`, `updated_at`, `sObservaciones`, `iIdEmpleado`, `iIdSucursal`, `iIdTipoMovimiento`) VALUES
+(1, 1, '2023-10-30 22:36:53.177894', NULL, '1000.00', NULL, '2023-10-30 22:36:53.177894', '2023-10-30 22:36:53.177894', 'no hubo moneda extranjera', 1, 1, 1),
+(2, 2, '2023-10-31 20:11:39.094837', NULL, '2300.00', NULL, '2023-10-31 20:11:39.094837', '2023-10-31 20:11:39.094837', 'no hubo moneda extranjera', 1, 1, 1),
+(3, 3, '2023-11-01 23:30:09.338171', NULL, '234.00', NULL, '2023-11-01 23:30:09.338171', '2023-11-01 23:30:09.338171', 'no hubo moneda extranjera', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -393,24 +304,25 @@ CREATE TABLE `cajas` (
 --
 
 CREATE TABLE `clientes` (
-  `iIdCliente` bigint(20) UNSIGNED NOT NULL,
+  `iIdCliente` bigint(20) NOT NULL,
   `sNombreCliente` varchar(191) NOT NULL,
   `sApellidoCliente` varchar(191) NOT NULL,
   `iDNI` int(11) NOT NULL,
   `iIdEstado` int(11) NOT NULL,
   `sEmail` varchar(50) NOT NULL,
   `sTelefono` varchar(15) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
+  `iIdTipoCliente` bigint(20) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`iIdCliente`, `sNombreCliente`, `sApellidoCliente`, `iDNI`, `iIdEstado`, `sEmail`, `sTelefono`, `created_at`, `updated_at`) VALUES
-(1, 'Laura Eugenia', 'Lopez', 18765432, 1, 'isdmzoom10@gmail.com', '03876555903', '2023-07-23 22:57:05', '2023-07-24 00:13:41'),
-(3, 'Pilar', 'Zambrano', 46789032, 1, 'administrator@brackets.sk', '03876555901', '2023-07-24 01:00:42', '2023-07-24 01:00:42');
+INSERT INTO `clientes` (`iIdCliente`, `sNombreCliente`, `sApellidoCliente`, `iDNI`, `iIdEstado`, `sEmail`, `sTelefono`, `created_at`, `updated_at`, `iIdTipoCliente`, `user_id`) VALUES
+(1, 'pili', 'pililiu', 45567754, 1, '', '', NULL, NULL, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -419,13 +331,13 @@ INSERT INTO `clientes` (`iIdCliente`, `sNombreCliente`, `sApellidoCliente`, `iDN
 --
 
 CREATE TABLE `comprobantes` (
-  `iIdComprobante` bigint(20) UNSIGNED NOT NULL,
+  `iIdComprobante` bigint(20) NOT NULL,
   `sNombreComprobante` varchar(191) NOT NULL,
   `sDescripcion` varchar(191) NOT NULL,
-  `iIdTipoComprobante` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
+  `iIdTipoComprobante` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -434,15 +346,86 @@ CREATE TABLE `comprobantes` (
 --
 
 CREATE TABLE `comprobante_ventas` (
-  `iIdComprobanteVenta` bigint(20) UNSIGNED NOT NULL,
-  `dFechaEmision` datetime NOT NULL,
+  `iIdComprobanteVenta` bigint(20) NOT NULL,
+  `dFechaEmision` datetime(6) NOT NULL,
   `fImporte` decimal(8,2) NOT NULL,
   `iIdEstado` int(11) NOT NULL,
-  `iIdVenta` bigint(20) UNSIGNED NOT NULL,
-  `iIdComprobante` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
+  `iIdComprobante` bigint(20) NOT NULL,
+  `iIdVenta` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detallepedidos`
+--
+
+CREATE TABLE `detallepedidos` (
+  `iIdDetallePedido` bigint(20) NOT NULL,
+  `iCantidad` int(11) NOT NULL,
+  `precio_unitario` decimal(10,2) NOT NULL,
+  `iIdPedido` bigint(20) DEFAULT NULL,
+  `iIdProducto` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `detallepedidos`
+--
+
+INSERT INTO `detallepedidos` (`iIdDetallePedido`, `iCantidad`, `precio_unitario`, `iIdPedido`, `iIdProducto`) VALUES
+(1, 1, '1000.00', 3, 1),
+(2, 1, '3500.00', 3, 2),
+(3, 1, '1000.00', 4, 1),
+(4, 1, '1000.00', 5, 1),
+(5, 1, '2900.00', 5, 3),
+(6, 1, '1000.00', 6, 1),
+(7, 1, '2900.00', 6, 3),
+(8, 1, '1000.00', 7, 1),
+(9, 1, '2900.00', 7, 3),
+(10, 1, '1000.00', 8, 1),
+(11, 1, '2900.00', 8, 3),
+(12, 1, '1000.00', 9, 1),
+(13, 1, '2900.00', 9, 3),
+(14, 1, '1000.00', 10, 1),
+(15, 1, '3500.00', 10, 2),
+(16, 1, '1000.00', 11, 1),
+(17, 1, '3500.00', 11, 2),
+(18, 1, '3500.00', 12, 2),
+(19, 1, '1000.00', 13, 1),
+(20, 1, '3500.00', 14, 2),
+(21, 1, '2700.00', 15, 4),
+(22, 1, '2900.00', 16, 3),
+(23, 1, '1000.00', 17, 1),
+(24, 1, '3500.00', 18, 2),
+(25, 1, '1000.00', 18, 1),
+(26, 1, '3500.00', 19, 2),
+(27, 1, '2700.00', 19, 4),
+(28, 1, '1000.00', 20, 1),
+(29, 1, '2700.00', 21, 4),
+(30, 1, '1000.00', 22, 1),
+(31, 1, '3500.00', 23, 2),
+(32, 1, '3500.00', 24, 2),
+(33, 1, '1000.00', 25, 1),
+(34, 1, '3500.00', 26, 2),
+(35, 1, '1000.00', 26, 1),
+(36, 1, '3500.00', 27, 2),
+(37, 1, '3500.00', 28, 2),
+(38, 1, '1000.00', 28, 1),
+(39, 1, '2700.00', 28, 4),
+(40, 1, '2900.00', 29, 3),
+(41, 1, '3500.00', 29, 2),
+(42, 1, '3500.00', 30, 2),
+(43, 1, '1000.00', 30, 1),
+(44, 1, '2700.00', 30, 4),
+(45, 1, '3500.00', 31, 2),
+(46, 1, '3500.00', 32, 2),
+(47, 1, '1000.00', 34, 1),
+(48, 1, '1000.00', 35, 1),
+(49, 2, '7000.00', 36, 2),
+(50, 1, '1000.00', 36, 1),
+(51, 1, '3500.00', 37, 2);
 
 -- --------------------------------------------------------
 
@@ -459,39 +442,28 @@ CREATE TABLE `django_admin_log` (
   `change_message` longtext NOT NULL,
   `content_type_id` int(11) DEFAULT NULL,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `django_admin_log`
 --
 
 INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`, `action_flag`, `change_message`, `content_type_id`, `user_id`) VALUES
-(1, '2023-09-20 00:22:55.835543', '2', 'TipoEmpleado object (2)', 1, '[{\"added\": {}}]', 8, 1),
-(2, '2023-09-20 00:23:07.803592', '1', 'TipoEmpleado object (1)', 2, '[]', 8, 1),
-(3, '2023-09-20 00:23:17.048366', '2', 'TipoEmpleado object (2)', 2, '[{\"changed\": {\"fields\": [\"Stipoempleado\"]}}]', 8, 1),
-(4, '2023-09-20 00:23:52.283191', '1', 'Empleados object (1)', 1, '[{\"added\": {}}]', 7, 1),
-(5, '2023-09-24 22:16:37.777472', '2', 'Empleados object (2)', 1, '[{\"added\": {}}]', 19, 1),
-(6, '2023-09-24 22:21:05.679693', '3', 'Empleados object (3)', 1, '[{\"added\": {}}]', 19, 1),
-(7, '2023-09-24 22:21:51.149205', '3', 'Mozo', 1, '[{\"added\": {}}]', 21, 1),
-(8, '2023-09-24 22:22:34.336377', '4', 'Empleados object (4)', 1, '[{\"added\": {}}]', 19, 1),
-(9, '2023-09-24 22:23:03.371206', '5', 'Empleados object (5)', 1, '[{\"added\": {}}]', 19, 1),
-(10, '2023-09-24 22:23:48.689662', '6', 'Empleados object (6)', 1, '[{\"added\": {}}]', 19, 1),
-(11, '2023-09-24 22:24:25.440610', '7', 'Empleados object (7)', 1, '[{\"added\": {}}]', 19, 1),
-(12, '2023-09-24 22:25:11.511633', '7', 'Empleados object (7)', 2, '[{\"changed\": {\"fields\": [\"Idni\"]}}]', 19, 1),
-(13, '2023-09-24 22:39:40.639575', '1', 'TipoProductos object (1)', 1, '[{\"added\": {}}]', 20, 1),
-(14, '2023-09-24 23:16:22.444780', '1', 'Productos object (1)', 1, '[{\"added\": {}}]', 28, 1),
-(15, '2023-09-26 21:12:26.162752', '2', 'Pizza especial', 1, '[{\"added\": {}}]', 28, 1),
-(16, '2023-09-26 21:12:52.881759', '1', 'Pastas', 2, '[{\"changed\": {\"fields\": [\"Snombretipoproducto\"]}}]', 20, 1),
-(17, '2023-09-26 21:13:10.757900', '2', 'Saludable', 1, '[{\"added\": {}}]', 20, 1),
-(18, '2023-09-26 21:13:19.793360', '1', 'Desayuno', 2, '[{\"changed\": {\"fields\": [\"Iidtipoproducto\"]}}]', 28, 1),
-(19, '2023-09-26 21:15:12.854589', '3', 'Frutos rojos', 1, '[{\"added\": {}}]', 28, 1),
-(20, '2023-09-26 21:16:38.352056', '4', 'Desayuno proteico', 1, '[{\"added\": {}}]', 28, 1),
-(21, '2023-10-04 15:10:03.253021', '1', 'Usuario', 1, '[{\"added\": {}}]', 3, 1),
-(22, '2023-10-04 15:10:19.875830', '2', 'visitante', 1, '[{\"added\": {}}]', 3, 1),
-(23, '2023-10-04 15:10:51.274430', '3', 'Operador', 1, '[{\"added\": {}}]', 3, 1),
-(24, '2023-10-04 15:10:59.553561', '4', 'Administrador', 1, '[{\"added\": {}}]', 3, 1),
-(25, '2023-10-04 15:19:09.379604', '3', 'UserRegister', 1, '[{\"added\": {}}]', 4, 1),
-(26, '2023-10-04 15:19:56.899422', '3', 'UserRegister', 2, '[{\"changed\": {\"fields\": [\"Groups\"]}}]', 4, 1);
+(1, '2023-10-29 19:23:55.394188', '1', 'Administrador', 1, '[{\"added\": {}}]', 4, 1),
+(2, '2023-10-29 19:24:05.776934', '2', 'Usuario', 1, '[{\"added\": {}}]', 4, 1),
+(3, '2023-10-29 19:24:12.473196', '3', 'Operador', 1, '[{\"added\": {}}]', 4, 1),
+(4, '2023-10-29 19:25:02.176882', '1', 'pilar', 2, '[{\"changed\": {\"fields\": [\"Groups\"]}}]', 5, 1),
+(5, '2023-10-29 19:25:47.006990', '1', 'TipoProductos object (1)', 1, '[{\"added\": {}}]', 27, 1),
+(6, '2023-10-29 19:30:55.633399', '2', 'TipoProductos object (2)', 1, '[{\"added\": {}}]', 27, 1),
+(7, '2023-10-29 19:34:20.936656', '1', 'Productos object (1)', 1, '[{\"added\": {}}]', 29, 1),
+(8, '2023-10-29 19:34:55.648353', '2', 'Productos object (2)', 1, '[{\"added\": {}}]', 29, 1),
+(9, '2023-10-29 19:35:29.498228', '3', 'Productos object (3)', 1, '[{\"added\": {}}]', 29, 1),
+(10, '2023-10-29 19:35:57.144873', '4', 'Productos object (4)', 1, '[{\"added\": {}}]', 29, 1),
+(11, '2023-10-29 20:22:18.176265', '1', 'Empleados object (1)', 1, '[{\"added\": {}}]', 20, 1),
+(12, '2023-10-30 22:32:19.244668', '1', 'Apertura', 1, '[{\"added\": {}}]', 25, 1),
+(13, '2023-10-30 22:32:44.168622', '2', 'Salida', 1, '[{\"added\": {}}]', 25, 1),
+(14, '2023-10-30 22:32:59.140632', '3', 'Cierre', 1, '[{\"added\": {}}]', 25, 1),
+(15, '2023-10-30 22:33:17.908266', '1', 'Centro', 1, '[{\"added\": {}}]', 22, 1);
 
 -- --------------------------------------------------------
 
@@ -503,70 +475,45 @@ CREATE TABLE `django_content_type` (
   `id` int(11) NOT NULL,
   `app_label` varchar(100) NOT NULL,
   `model` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `django_content_type`
 --
 
 INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
-(1, 'admin', 'logentry'),
-(9, 'app', 'authgroup'),
-(10, 'app', 'authgrouppermissions'),
-(11, 'app', 'authpermission'),
-(12, 'app', 'authuser'),
-(13, 'app', 'authusergroups'),
-(14, 'app', 'authuseruserpermissions'),
-(22, 'app', 'cajas'),
-(23, 'app', 'clientes'),
-(24, 'app', 'comprobantes'),
-(25, 'app', 'comprobanteventas'),
-(15, 'app', 'djangoadminlog'),
-(16, 'app', 'djangocontenttype'),
-(17, 'app', 'djangomigrations'),
-(18, 'app', 'djangosession'),
-(19, 'app', 'empleados'),
-(26, 'app', 'mesas'),
-(27, 'app', 'pedidos'),
-(28, 'app', 'productos'),
-(29, 'app', 'sucursales'),
-(30, 'app', 'tipocomprobante'),
-(21, 'app', 'tipoempleado'),
-(31, 'app', 'tipopedidos'),
-(20, 'app', 'tipoproductos'),
-(32, 'app', 'ventas'),
-(3, 'auth', 'group'),
-(2, 'auth', 'permission'),
-(4, 'auth', 'user'),
-(7, 'cajas', 'empleados'),
-(8, 'cajas', 'tipoempleado'),
-(35, 'CarritoApp', 'authgroup'),
-(36, 'CarritoApp', 'authgrouppermissions'),
-(37, 'CarritoApp', 'authpermission'),
-(38, 'CarritoApp', 'authuser'),
-(39, 'CarritoApp', 'authusergroups'),
-(40, 'CarritoApp', 'authuseruserpermissions'),
-(41, 'CarritoApp', 'cajas'),
-(42, 'CarritoApp', 'clientes'),
-(43, 'CarritoApp', 'comprobantes'),
-(44, 'CarritoApp', 'comprobanteventas'),
-(45, 'CarritoApp', 'djangoadminlog'),
-(46, 'CarritoApp', 'djangocontenttype'),
-(47, 'CarritoApp', 'djangomigrations'),
-(48, 'CarritoApp', 'djangosession'),
-(49, 'CarritoApp', 'empleados'),
-(50, 'CarritoApp', 'mesas'),
-(51, 'CarritoApp', 'pedidos'),
-(52, 'CarritoApp', 'productos'),
-(53, 'CarritoApp', 'sucursales'),
-(54, 'CarritoApp', 'tipocomprobante'),
-(55, 'CarritoApp', 'tipoempleado'),
-(56, 'CarritoApp', 'tipopedidos'),
-(57, 'CarritoApp', 'tipoproductos'),
-(58, 'CarritoApp', 'ventas'),
-(33, 'cart', 'productos'),
-(34, 'cart', 'tipoproductos'),
-(5, 'contenttypes', 'contenttype'),
+(2, 'admin', 'logentry'),
+(4, 'auth', 'group'),
+(3, 'auth', 'permission'),
+(5, 'auth', 'user'),
+(7, 'CarritoApp', 'authgroup'),
+(8, 'CarritoApp', 'authgrouppermissions'),
+(9, 'CarritoApp', 'authpermission'),
+(10, 'CarritoApp', 'authuser'),
+(11, 'CarritoApp', 'authusergroups'),
+(12, 'CarritoApp', 'authuseruserpermissions'),
+(17, 'CarritoApp', 'cajas'),
+(18, 'CarritoApp', 'clientes'),
+(19, 'CarritoApp', 'comprobantes'),
+(32, 'CarritoApp', 'comprobanteventas'),
+(31, 'CarritoApp', 'detallepedidos'),
+(13, 'CarritoApp', 'djangoadminlog'),
+(14, 'CarritoApp', 'djangocontenttype'),
+(15, 'CarritoApp', 'djangomigrations'),
+(16, 'CarritoApp', 'djangosession'),
+(20, 'CarritoApp', 'empleados'),
+(21, 'CarritoApp', 'mesas'),
+(30, 'CarritoApp', 'pedidos'),
+(29, 'CarritoApp', 'productos'),
+(22, 'CarritoApp', 'sucursales'),
+(33, 'CarritoApp', 'tipocliente'),
+(23, 'CarritoApp', 'tipocomprobante'),
+(24, 'CarritoApp', 'tipoempleado'),
+(25, 'CarritoApp', 'tipomovimiento'),
+(26, 'CarritoApp', 'tipopedidos'),
+(27, 'CarritoApp', 'tipoproductos'),
+(28, 'CarritoApp', 'ventas'),
+(1, 'contenttypes', 'contenttype'),
 (6, 'sessions', 'session');
 
 -- --------------------------------------------------------
@@ -580,35 +527,40 @@ CREATE TABLE `django_migrations` (
   `app` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `django_migrations`
 --
 
 INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
-(1, 'contenttypes', '0001_initial', '2023-09-20 00:06:01.166795'),
-(2, 'auth', '0001_initial', '2023-09-20 00:06:01.886947'),
-(3, 'admin', '0001_initial', '2023-09-20 00:06:02.071842'),
-(4, 'admin', '0002_logentry_remove_auto_add', '2023-09-20 00:06:02.087504'),
-(5, 'admin', '0003_logentry_add_action_flag_choices', '2023-09-20 00:06:02.117896'),
-(6, 'contenttypes', '0002_remove_content_type_name', '2023-09-20 00:06:02.233977'),
-(7, 'auth', '0002_alter_permission_name_max_length', '2023-09-20 00:06:02.315903'),
-(8, 'auth', '0003_alter_user_email_max_length', '2023-09-20 00:06:02.348667'),
-(9, 'auth', '0004_alter_user_username_opts', '2023-09-20 00:06:02.364084'),
-(10, 'auth', '0005_alter_user_last_login_null', '2023-09-20 00:06:02.470888'),
-(11, 'auth', '0006_require_contenttypes_0002', '2023-09-20 00:06:02.475112'),
-(12, 'auth', '0007_alter_validators_add_error_messages', '2023-09-20 00:06:02.485447'),
-(13, 'auth', '0008_alter_user_username_max_length', '2023-09-20 00:06:02.510920'),
-(14, 'auth', '0009_alter_user_last_name_max_length', '2023-09-20 00:06:02.539459'),
-(15, 'auth', '0010_alter_group_name_max_length', '2023-09-20 00:06:02.563892'),
-(16, 'auth', '0011_update_proxy_permissions', '2023-09-20 00:06:02.576932'),
-(17, 'auth', '0012_alter_user_first_name_max_length', '2023-09-20 00:06:02.618547'),
-(18, 'sessions', '0001_initial', '2023-09-20 00:06:02.693186'),
-(19, 'app', '0001_initial', '2023-09-24 13:08:18.383741'),
-(20, 'app', '0002_cajas_clientes_comprobantes_comprobanteventas_mesas_and_more', '2023-09-24 22:48:12.751033'),
-(21, 'cart', '0001_initial', '2023-09-26 02:49:48.847442'),
-(22, 'CarritoApp', '0001_initial', '2023-09-27 17:47:03.750403');
+(1, 'contenttypes', '0001_initial', '2023-10-29 19:19:00.423881'),
+(2, 'auth', '0001_initial', '2023-10-29 19:19:01.340426'),
+(3, 'CarritoApp', '0001_initial', '2023-10-29 19:19:03.410503'),
+(4, 'admin', '0001_initial', '2023-10-29 19:19:03.618110'),
+(5, 'admin', '0002_logentry_remove_auto_add', '2023-10-29 19:19:03.633731'),
+(6, 'admin', '0003_logentry_add_action_flag_choices', '2023-10-29 19:19:03.658859'),
+(7, 'contenttypes', '0002_remove_content_type_name', '2023-10-29 19:19:03.788151'),
+(8, 'auth', '0002_alter_permission_name_max_length', '2023-10-29 19:19:03.988066'),
+(9, 'auth', '0003_alter_user_email_max_length', '2023-10-29 19:19:04.097741'),
+(10, 'auth', '0004_alter_user_username_opts', '2023-10-29 19:19:04.107464'),
+(11, 'auth', '0005_alter_user_last_login_null', '2023-10-29 19:19:04.201479'),
+(12, 'auth', '0006_require_contenttypes_0002', '2023-10-29 19:19:04.209492'),
+(13, 'auth', '0007_alter_validators_add_error_messages', '2023-10-29 19:19:04.241161'),
+(14, 'auth', '0008_alter_user_username_max_length', '2023-10-29 19:19:04.291472'),
+(15, 'auth', '0009_alter_user_last_name_max_length', '2023-10-29 19:19:04.310195'),
+(16, 'auth', '0010_alter_group_name_max_length', '2023-10-29 19:19:04.410668'),
+(17, 'auth', '0011_update_proxy_permissions', '2023-10-29 19:19:04.444669'),
+(18, 'auth', '0012_alter_user_first_name_max_length', '2023-10-29 19:19:04.477883'),
+(19, 'sessions', '0001_initial', '2023-10-29 19:19:04.545032'),
+(20, 'CarritoApp', '0002_alter_pedidos_options', '2023-10-29 19:19:36.104774'),
+(21, 'CarritoApp', '0003_alter_cajas_options_alter_clientes_options_and_more', '2023-10-30 22:35:39.350408'),
+(22, 'CarritoApp', '0004_alter_cajas_options', '2023-10-30 22:35:39.366408'),
+(23, 'CarritoApp', '0005_alter_detallepedidos_options_and_more', '2023-10-31 21:42:26.928698'),
+(24, 'CarritoApp', '0006_tipocliente_alter_detallepedidos_options', '2023-11-11 20:23:29.403016'),
+(25, 'CarritoApp', '0007_alter_clientes_options_alter_tipocliente_options', '2023-11-11 20:34:37.348485'),
+(26, 'CarritoApp', '0008_clientes_iidtipocliente', '2023-11-11 20:36:10.773446'),
+(27, 'CarritoApp', '0009_clientes_user', '2023-11-11 20:38:08.280072');
 
 -- --------------------------------------------------------
 
@@ -620,17 +572,14 @@ CREATE TABLE `django_session` (
   `session_key` varchar(40) NOT NULL,
   `session_data` longtext NOT NULL,
   `expire_date` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `django_session`
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('1jemjgeyc9a7ja5x4myleaicte0pstht', 'eyJjYXJyaXRvIjp7IjIiOnsicHJvZHVjdG9faWQiOjIsIm5vbWJyZSI6IlBpenphIGVzcGVjaWFsIiwiYWN1bXVsYWRvIjo0MDAwLCJjYW50aWRhZCI6Mn19fQ:1qn8va:hqdul1Nr0raCWqACqsJRId6T46aAmRB1rH0CQO7xjQc', '2023-10-16 02:44:58.436712'),
-('p5udewsadal1uszt50i2benq0yobuqca', '.eJxVjM0OwiAQhN-FsyH8bIF69O4zkGVZpWogKe3J-O62SQ96mmS-b-YtIq5LiWvnOU5ZnIUWp98uIT257iA_sN6bpFaXeUpyV-RBu7y2zK_L4f4dFOxlWxMl1Ba08SYRJPCGg1JjUDx6MNq5G3viAGoLYwfWComtZwCyQyYnPl_TvTeV:1qikvy:9qvUQ-7FPUvrXUjXpEKKRzibwVMH_zHnCMRJJAKgVk0', '2023-10-04 00:19:14.188590'),
-('u1hgspsjoydy98as58pguo5fvp9vc2cd', '.eJxVjEEOwiAQRe_C2hAIyIBL956BzDAgVQNJaVfGu9smXej2vff_W0RclxrXkec4sbgILU6_jDA9c9sFP7Ddu0y9LfNEck_kYYe8dc6v69H-HVQcdVuXRGALBefRK0qWrD2bAJgdFQjolHZQgNkYJg3BY9mAKpy0doiJxOcL-oQ4mg:1qlXI5:FjnEEtp40eajgNrlIMOxRZmgLwbd9X8dA-b3_rK8OVA', '2023-10-11 16:21:33.677056'),
-('wcga0oh2yfrgybnb2tyto09gy92rveow', '.eJxlzLEOwiAQgOFXaW5mABoXZuPsG5gTGDAt1xzcYBveXdyqLP_2fwd4ZE6VwB1gv9mYgvhKjxTAWQWZ1idHcHBP-45TLFv0CRdQgF5WWTD012qtVadyTQH7Z5oCM2jmpF1jwbdk-nMuozMPznxybiyVysT0ovJrmcFq7QPCzk4t:1qn515:tq3KHPKvUX9Zugx9XF8nwYUne-kBtmpUBpta0Grd6qM', '2023-10-15 22:34:23.390745');
+('zoi0xmvh9e1gxe9ae9djnwd51m8n1s10', '.eJxVjDsOwyAQRO9CHSFYsFlSpvcZEMsnOIlAMnYV5e6xJRdJOfPezJs5v63FbT0tbo7syjS7_HbkwzPVA8SHr_fGQ6vrMhM_FH7SzqcW0-t2un8Hxfeyr5GMxRhIgwYCOWaFox8UWmtyEll6HYwlBGXlEAhEjAJIiT0AEqBhny_PqTcX:1r1vKQ:33CgY9Tb-_J4jPP8LSgbs3oIb0dwkJj_NzNdnORvmmo', '2023-11-25 21:15:42.485893');
 
 -- --------------------------------------------------------
 
@@ -639,28 +588,23 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 --
 
 CREATE TABLE `empleados` (
-  `iIdEmpleado` bigint(20) UNSIGNED NOT NULL,
+  `iIdEmpleado` bigint(20) NOT NULL,
   `sNombre` varchar(191) NOT NULL,
   `sApellido` varchar(191) NOT NULL,
   `iDNI` int(11) NOT NULL,
   `iIdEstado` int(11) NOT NULL,
-  `iIdTipoEmpleado` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
+  `iIdTipoEmpleado` bigint(20) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `empleados`
 --
 
-INSERT INTO `empleados` (`iIdEmpleado`, `sNombre`, `sApellido`, `iDNI`, `iIdEstado`, `iIdTipoEmpleado`, `created_at`, `updated_at`) VALUES
-(1, 'Pilar', 'Cayo', 29335655, 1, 1, '2023-09-20 03:23:47', '2023-09-20 03:23:49'),
-(2, 'Maria', 'Vazquez', 39567888, 1, 1, '2023-09-25 01:16:30', '2023-09-25 01:16:34'),
-(3, 'Laura', 'Luna', 48999999, 1, 2, '2023-09-25 01:20:55', '2023-09-25 01:21:01'),
-(4, 'Marcos', 'Surin', 898444433, 1, 1, '2023-09-25 01:22:29', '2023-09-25 01:22:31'),
-(5, 'Marcelo', 'Castro', 65654444, 1, 3, '2023-09-25 01:22:57', '2023-09-25 01:23:00'),
-(6, 'Gaston', 'Varela', 99077554, 1, 3, '2023-09-25 01:23:43', '2023-09-25 01:23:45'),
-(7, 'Lucas', 'Meza', 54789346, 1, 3, '2023-09-25 01:24:17', '2023-09-25 01:24:20');
+INSERT INTO `empleados` (`iIdEmpleado`, `sNombre`, `sApellido`, `iDNI`, `iIdEstado`, `created_at`, `updated_at`, `iIdTipoEmpleado`, `user_id`) VALUES
+(1, 'Laura', 'Lopez', 4356782, 1, '2023-10-29 20:22:13.000000', '2023-10-29 20:22:15.000000', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -669,13 +613,13 @@ INSERT INTO `empleados` (`iIdEmpleado`, `sNombre`, `sApellido`, `iDNI`, `iIdEsta
 --
 
 CREATE TABLE `mesas` (
-  `iIdMesa` bigint(20) UNSIGNED NOT NULL,
+  `iIdMesa` bigint(20) NOT NULL,
   `iNroMesa` int(11) NOT NULL,
   `iIdEstado` int(11) NOT NULL,
-  `iIdSucursal` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
+  `iIdSucursal` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -684,17 +628,61 @@ CREATE TABLE `mesas` (
 --
 
 CREATE TABLE `pedidos` (
-  `iIdPedido` bigint(20) UNSIGNED NOT NULL,
+  `iIdPedido` bigint(20) NOT NULL,
   `iNroPedido` int(11) NOT NULL,
-  `dFechaPedido` datetime NOT NULL,
+  `dFechaPedido` datetime(6) NOT NULL,
   `iIdEstado` int(11) NOT NULL,
-  `iIdCliente` bigint(20) UNSIGNED NOT NULL,
-  `iIdTipoPedido` bigint(20) UNSIGNED NOT NULL,
-  `iIdEmpleado` bigint(20) UNSIGNED NOT NULL,
-  `iIdMesa` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `iTotal` int(11) NOT NULL,
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
+  `iIdCliente` bigint(20) DEFAULT NULL,
+  `iIdEmpleado` bigint(20) DEFAULT NULL,
+  `iIdMesa` bigint(20) DEFAULT NULL,
+  `iIdTipoPedido` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`iIdPedido`, `iNroPedido`, `dFechaPedido`, `iIdEstado`, `iTotal`, `created_at`, `updated_at`, `iIdCliente`, `iIdEmpleado`, `iIdMesa`, `iIdTipoPedido`) VALUES
+(1, 1, '2023-10-29 03:00:00.000000', 1, 0, NULL, NULL, NULL, 1, NULL, 2),
+(2, 2, '2023-10-29 03:00:00.000000', 1, 0, NULL, NULL, NULL, 1, NULL, 2),
+(3, 3, '2023-10-29 03:00:00.000000', 1, 4500, NULL, NULL, NULL, 1, NULL, 2),
+(4, 4, '2023-10-29 03:00:00.000000', 1, 1000, NULL, NULL, NULL, 1, NULL, 2),
+(5, 5, '2023-10-29 03:00:00.000000', 1, 3900, NULL, NULL, NULL, 1, NULL, 2),
+(6, 6, '2023-10-29 03:00:00.000000', 1, 3900, NULL, NULL, NULL, 1, NULL, 2),
+(7, 7, '2023-10-29 03:00:00.000000', 1, 3900, NULL, NULL, NULL, 1, NULL, 2),
+(8, 8, '2023-10-29 03:00:00.000000', 1, 3900, NULL, NULL, NULL, 1, NULL, 2),
+(9, 9, '2023-10-29 03:00:00.000000', 1, 3900, NULL, NULL, NULL, 1, NULL, 2),
+(10, 10, '2023-10-31 03:00:00.000000', 1, 4500, NULL, NULL, NULL, 1, NULL, 2),
+(11, 11, '2023-10-31 03:00:00.000000', 1, 4500, NULL, NULL, NULL, 1, NULL, 2),
+(12, 12, '2023-10-31 03:00:00.000000', 1, 3500, NULL, NULL, NULL, 1, NULL, 2),
+(13, 13, '2023-10-31 03:00:00.000000', 1, 1000, NULL, NULL, NULL, 1, NULL, 2),
+(14, 14, '2023-10-31 03:00:00.000000', 1, 3500, NULL, NULL, NULL, 1, NULL, 2),
+(15, 15, '2023-10-31 03:00:00.000000', 1, 2700, NULL, NULL, NULL, 1, NULL, 2),
+(16, 16, '2023-10-31 03:00:00.000000', 1, 2900, NULL, NULL, NULL, 1, NULL, 2),
+(17, 17, '2023-10-31 03:00:00.000000', 1, 1000, NULL, NULL, NULL, 1, NULL, 2),
+(18, 18, '2023-10-31 03:00:00.000000', 1, 4500, NULL, NULL, NULL, 1, NULL, 2),
+(19, 19, '2023-10-31 03:00:00.000000', 1, 6200, NULL, NULL, NULL, 1, NULL, 2),
+(20, 20, '2023-10-31 03:00:00.000000', 1, 1000, NULL, NULL, NULL, 1, NULL, 2),
+(21, 21, '2023-10-31 03:00:00.000000', 1, 2700, NULL, NULL, NULL, 1, NULL, 2),
+(22, 22, '2023-10-31 03:00:00.000000', 1, 1000, NULL, NULL, NULL, 1, NULL, 2),
+(23, 23, '2023-10-31 03:00:00.000000', 1, 3500, NULL, NULL, NULL, 1, NULL, 2),
+(24, 24, '2023-10-31 03:00:00.000000', 1, 3500, NULL, NULL, NULL, 1, NULL, 2),
+(25, 25, '2023-10-31 03:00:00.000000', 1, 1000, NULL, NULL, NULL, 1, NULL, 2),
+(26, 26, '2023-10-31 03:00:00.000000', 1, 4500, NULL, NULL, NULL, 1, NULL, 2),
+(27, 27, '2023-10-31 03:00:00.000000', 1, 3500, NULL, NULL, NULL, 1, NULL, 2),
+(28, 28, '2023-10-31 03:00:00.000000', 1, 7200, NULL, NULL, NULL, 1, NULL, 2),
+(29, 29, '2023-10-31 03:00:00.000000', 1, 6400, NULL, NULL, NULL, 1, NULL, 2),
+(30, 30, '2023-10-31 03:00:00.000000', 1, 7200, NULL, NULL, NULL, 1, NULL, 2),
+(31, 31, '2023-10-31 03:00:00.000000', 1, 3500, NULL, NULL, NULL, 1, NULL, 2),
+(32, 32, '2023-10-31 03:00:00.000000', 1, 3500, NULL, NULL, NULL, 1, NULL, 2),
+(33, 33, '2023-10-31 03:00:00.000000', 1, 0, NULL, NULL, NULL, 1, NULL, 2),
+(34, 34, '2023-10-31 03:00:00.000000', 1, 1000, NULL, NULL, NULL, 1, NULL, 2),
+(35, 35, '2023-10-31 03:00:00.000000', 1, 1000, NULL, NULL, NULL, 1, NULL, 2),
+(36, 36, '2023-10-31 03:00:00.000000', 1, 8000, NULL, NULL, NULL, 1, NULL, 2),
+(37, 37, '2023-11-01 03:00:00.000000', 1, 3500, NULL, NULL, NULL, 1, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -703,27 +691,27 @@ CREATE TABLE `pedidos` (
 --
 
 CREATE TABLE `productos` (
-  `iIdProducto` bigint(20) UNSIGNED NOT NULL,
+  `iIdProducto` bigint(20) NOT NULL,
   `sNombreProducto` varchar(191) NOT NULL,
   `sDescripcion` varchar(191) NOT NULL,
   `iStock` int(11) NOT NULL,
   `dPrecio` int(11) NOT NULL,
   `iIdEstado` int(11) NOT NULL,
-  `iIdTipoProducto` bigint(20) UNSIGNED NOT NULL,
   `sUrl` varchar(250) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
+  `iIdTipoProducto` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`iIdProducto`, `sNombreProducto`, `sDescripcion`, `iStock`, `dPrecio`, `iIdEstado`, `iIdTipoProducto`, `sUrl`, `created_at`, `updated_at`) VALUES
-(1, 'Desayuno', 'Desayuno saludable con frutos secos', 20, 2500, 1, 2, 'img/desayunoSaludable.jpg', '2023-09-25 02:16:16', '2023-09-25 02:16:19'),
-(2, 'Pizza especial', 'Pizza especial con la mejor selección de hierbas, especias y condimentos Alicante', 20, 2000, 1, 1, 'img/pizza.jpg', '2023-09-27 00:12:20', '2023-09-27 00:12:24'),
-(3, 'Frutos rojos', 'Bol de cereales y frutos rojos', 10, 1500, 1, 2, 'img/frutosRojos.jpg', '2023-09-27 00:15:08', '2023-09-27 00:15:10'),
-(4, 'Desayuno proteico', 'Desayuno saludable con huevos y palta', 13, 1800, 1, 2, 'img/break.jpg', '2023-09-27 00:16:33', '2023-09-27 00:16:36');
+INSERT INTO `productos` (`iIdProducto`, `sNombreProducto`, `sDescripcion`, `iStock`, `dPrecio`, `iIdEstado`, `sUrl`, `created_at`, `updated_at`, `iIdTipoProducto`) VALUES
+(1, 'Desayuno', 'Desayuno saludable con frutos secos', 10, 1000, 1, 'img/desayunoSaludable.jpg', '2023-10-29 19:34:18.000000', '2023-10-29 19:34:19.000000', 2),
+(2, 'Pizza especial', 'Pizza especial con la mejor selección de hierbas, especias y condimentos Alicante', 12, 3500, 1, 'img/pizza.jpg', '2023-10-29 19:34:53.000000', '2023-10-29 19:34:54.000000', 1),
+(3, 'Frutos rojos', 'Bol de cereales y frutos rojos', 34, 2900, 1, 'img/frutosRojos.jpg', '2023-10-29 19:35:27.000000', '2023-10-29 19:35:28.000000', 2),
+(4, 'Desayuno proteico', 'Desayuno saludable con huevos y palta', 23, 2700, 1, 'img/break.jpg', '2023-10-29 19:35:55.000000', '2023-10-29 19:35:56.000000', 2);
 
 -- --------------------------------------------------------
 
@@ -732,12 +720,38 @@ INSERT INTO `productos` (`iIdProducto`, `sNombreProducto`, `sDescripcion`, `iSto
 --
 
 CREATE TABLE `sucursales` (
-  `iIdSucursal` bigint(20) UNSIGNED NOT NULL,
+  `iIdSucursal` bigint(20) NOT NULL,
   `sNombre` varchar(191) NOT NULL,
   `iIdEstado` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `sucursales`
+--
+
+INSERT INTO `sucursales` (`iIdSucursal`, `sNombre`, `iIdEstado`, `created_at`, `updated_at`) VALUES
+(1, 'Centro', 1, '2023-10-30 22:33:14.000000', '2023-10-30 22:33:17.000000');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_cliente`
+--
+
+CREATE TABLE `tipo_cliente` (
+  `iIdTipoCliente` bigint(20) NOT NULL,
+  `sTipoCliente` varchar(191) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_cliente`
+--
+
+INSERT INTO `tipo_cliente` (`iIdTipoCliente`, `sTipoCliente`) VALUES
+(1, 'simple'),
+(2, 'premium');
 
 -- --------------------------------------------------------
 
@@ -746,11 +760,11 @@ CREATE TABLE `sucursales` (
 --
 
 CREATE TABLE `tipo_comprobante` (
-  `iIdTipoComprobante` bigint(20) UNSIGNED NOT NULL,
+  `iIdTipoComprobante` bigint(20) NOT NULL,
   `sNombreTipoComprobante` varchar(191) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -759,20 +773,38 @@ CREATE TABLE `tipo_comprobante` (
 --
 
 CREATE TABLE `tipo_empleado` (
-  `iIdTipoEmpleado` bigint(20) UNSIGNED NOT NULL,
+  `iIdTipoEmpleado` bigint(20) NOT NULL,
   `sTipoEmpleado` varchar(191) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `tipo_empleado`
 --
 
 INSERT INTO `tipo_empleado` (`iIdTipoEmpleado`, `sTipoEmpleado`, `created_at`, `updated_at`) VALUES
-(1, 'Cajero', '2023-09-08 05:47:15', '2023-09-08 05:47:19'),
-(2, 'Gerente', '2023-09-20 03:22:50', '2023-09-20 03:22:52'),
-(3, 'Mozo', '2023-09-25 01:21:46', '2023-09-25 01:21:48');
+(1, 'Gerente', '2023-10-29 17:20:55.000000', '2023-10-29 17:20:55.000000');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_movimiento`
+--
+
+CREATE TABLE `tipo_movimiento` (
+  `iIdTipoMovimiento` bigint(20) NOT NULL,
+  `sTipoMovimiento` varchar(191) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_movimiento`
+--
+
+INSERT INTO `tipo_movimiento` (`iIdTipoMovimiento`, `sTipoMovimiento`) VALUES
+(1, 'Apertura'),
+(2, 'Salida'),
+(3, 'Cierre');
 
 -- --------------------------------------------------------
 
@@ -781,12 +813,20 @@ INSERT INTO `tipo_empleado` (`iIdTipoEmpleado`, `sTipoEmpleado`, `created_at`, `
 --
 
 CREATE TABLE `tipo_pedidos` (
-  `iIdTipoPedido` bigint(20) UNSIGNED NOT NULL,
+  `iIdTipoPedido` bigint(20) NOT NULL,
   `sTipo` varchar(191) NOT NULL,
   `iIdEstado` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_pedidos`
+--
+
+INSERT INTO `tipo_pedidos` (`iIdTipoPedido`, `sTipo`, `iIdEstado`, `created_at`, `updated_at`) VALUES
+(1, 'InSitu', 1, NULL, NULL),
+(2, 'Online', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -795,20 +835,20 @@ CREATE TABLE `tipo_pedidos` (
 --
 
 CREATE TABLE `tipo_productos` (
-  `iIdTipoProducto` bigint(20) UNSIGNED NOT NULL,
+  `iIdTipoProducto` bigint(20) NOT NULL,
   `sNombreTipoProducto` varchar(191) NOT NULL,
   `iIdEstado` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `tipo_productos`
 --
 
 INSERT INTO `tipo_productos` (`iIdTipoProducto`, `sNombreTipoProducto`, `iIdEstado`, `created_at`, `updated_at`) VALUES
-(1, 'Pastas', 1, '2023-09-25 01:39:34', '2023-09-25 01:39:37'),
-(2, 'Saludable', 1, '2023-09-27 00:13:06', '2023-09-27 00:13:09');
+(1, 'Pastas', 1, '2023-10-29 19:25:45.000000', '2023-10-29 19:25:46.000000'),
+(2, 'Saludable', 1, '2023-10-29 19:30:53.000000', '2023-10-29 19:30:54.000000');
 
 -- --------------------------------------------------------
 
@@ -817,15 +857,15 @@ INSERT INTO `tipo_productos` (`iIdTipoProducto`, `sNombreTipoProducto`, `iIdEsta
 --
 
 CREATE TABLE `ventas` (
-  `iIdVenta` bigint(20) UNSIGNED NOT NULL,
+  `iIdVenta` bigint(20) NOT NULL,
   `iNroVenta` int(11) NOT NULL,
-  `dFechaVenta` datetime NOT NULL,
+  `dFechaVenta` datetime(6) NOT NULL,
   `fMontoVenta` decimal(8,2) NOT NULL,
-  `iIdEmpleado` bigint(20) UNSIGNED NOT NULL,
-  `iIdCaja` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
+  `iIdCaja` bigint(20) NOT NULL,
+  `iIdEmpleado` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Índices para tablas volcadas
@@ -881,29 +921,40 @@ ALTER TABLE `auth_user_user_permissions`
 --
 ALTER TABLE `cajas`
   ADD PRIMARY KEY (`iIdCaja`),
-  ADD KEY `cajas_iidempleado_foreign` (`iIdEmpleado`),
-  ADD KEY `cajas_iidsucursal_foreign` (`iIdSucursal`);
+  ADD KEY `cajas_iIdEmpleado_cec70c6e_fk_empleados_iIdEmpleado` (`iIdEmpleado`),
+  ADD KEY `cajas_iIdSucursal_98ce61ac_fk_sucursales_iIdSucursal` (`iIdSucursal`),
+  ADD KEY `cajas_iIdTipoMovimiento_a636b679_fk_tipo_movi` (`iIdTipoMovimiento`);
 
 --
 -- Indices de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  ADD PRIMARY KEY (`iIdCliente`);
+  ADD PRIMARY KEY (`iIdCliente`),
+  ADD UNIQUE KEY `user_id` (`user_id`),
+  ADD KEY `clientes_iIdTipoCliente_c76f3857_fk_tipo_cliente_iIdTipoCliente` (`iIdTipoCliente`);
 
 --
 -- Indices de la tabla `comprobantes`
 --
 ALTER TABLE `comprobantes`
   ADD PRIMARY KEY (`iIdComprobante`),
-  ADD KEY `comprobantes_iidtipocomprobante_foreign` (`iIdTipoComprobante`);
+  ADD KEY `comprobantes_iIdTipoComprobante_2541201e_fk_tipo_comp` (`iIdTipoComprobante`);
 
 --
 -- Indices de la tabla `comprobante_ventas`
 --
 ALTER TABLE `comprobante_ventas`
   ADD PRIMARY KEY (`iIdComprobanteVenta`),
-  ADD KEY `comprobante_ventas_iidventa_foreign` (`iIdVenta`),
-  ADD KEY `comprobante_ventas_iidcomprobante_foreign` (`iIdComprobante`);
+  ADD KEY `comprobante_ventas_iIdComprobante_ece15b11_fk_comproban` (`iIdComprobante`),
+  ADD KEY `comprobante_ventas_iIdVenta_1269f5cb_fk_ventas_iIdVenta` (`iIdVenta`);
+
+--
+-- Indices de la tabla `detallepedidos`
+--
+ALTER TABLE `detallepedidos`
+  ADD PRIMARY KEY (`iIdDetallePedido`),
+  ADD KEY `detallepedidos_iIdPedido_a3684dac_fk_pedidos_iIdPedido` (`iIdPedido`),
+  ADD KEY `detallepedidos_iIdProducto_fad082a6_fk_productos_iIdProducto` (`iIdProducto`);
 
 --
 -- Indices de la tabla `django_admin_log`
@@ -938,37 +989,44 @@ ALTER TABLE `django_session`
 --
 ALTER TABLE `empleados`
   ADD PRIMARY KEY (`iIdEmpleado`),
-  ADD KEY `empleados_iidtipoempleado_foreign` (`iIdTipoEmpleado`);
+  ADD UNIQUE KEY `user_id` (`user_id`),
+  ADD KEY `empleados_iIdTipoEmpleado_fd710ebb_fk_tipo_empl` (`iIdTipoEmpleado`);
 
 --
 -- Indices de la tabla `mesas`
 --
 ALTER TABLE `mesas`
   ADD PRIMARY KEY (`iIdMesa`),
-  ADD KEY `mesas_iidsucursal_foreign` (`iIdSucursal`);
+  ADD KEY `mesas_iIdSucursal_ff7c3954_fk_sucursales_iIdSucursal` (`iIdSucursal`);
 
 --
 -- Indices de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`iIdPedido`),
-  ADD KEY `pedidos_iidcliente_foreign` (`iIdCliente`),
-  ADD KEY `pedidos_iidtipopedido_foreign` (`iIdTipoPedido`),
-  ADD KEY `pedidos_iidempleado_foreign` (`iIdEmpleado`),
-  ADD KEY `pedidos_iidmesa_foreign` (`iIdMesa`);
+  ADD KEY `pedidos_iIdCliente_9340b32d_fk_clientes_iIdCliente` (`iIdCliente`),
+  ADD KEY `pedidos_iIdEmpleado_0bd663ce_fk_empleados_iIdEmpleado` (`iIdEmpleado`),
+  ADD KEY `pedidos_iIdMesa_53d383a6_fk_mesas_iIdMesa` (`iIdMesa`),
+  ADD KEY `pedidos_iIdTipoPedido_92a39193_fk_tipo_pedidos_iIdTipoPedido` (`iIdTipoPedido`);
 
 --
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`iIdProducto`),
-  ADD KEY `productos_iidtipoproducto_foreign` (`iIdTipoProducto`);
+  ADD KEY `productos_iIdTipoProducto_536e6d05_fk_tipo_prod` (`iIdTipoProducto`);
 
 --
 -- Indices de la tabla `sucursales`
 --
 ALTER TABLE `sucursales`
   ADD PRIMARY KEY (`iIdSucursal`);
+
+--
+-- Indices de la tabla `tipo_cliente`
+--
+ALTER TABLE `tipo_cliente`
+  ADD PRIMARY KEY (`iIdTipoCliente`);
 
 --
 -- Indices de la tabla `tipo_comprobante`
@@ -981,6 +1039,12 @@ ALTER TABLE `tipo_comprobante`
 --
 ALTER TABLE `tipo_empleado`
   ADD PRIMARY KEY (`iIdTipoEmpleado`);
+
+--
+-- Indices de la tabla `tipo_movimiento`
+--
+ALTER TABLE `tipo_movimiento`
+  ADD PRIMARY KEY (`iIdTipoMovimiento`);
 
 --
 -- Indices de la tabla `tipo_pedidos`
@@ -999,8 +1063,8 @@ ALTER TABLE `tipo_productos`
 --
 ALTER TABLE `ventas`
   ADD PRIMARY KEY (`iIdVenta`),
-  ADD KEY `ventas_iidempleado_foreign` (`iIdEmpleado`),
-  ADD KEY `ventas_iidcaja_foreign` (`iIdCaja`);
+  ADD KEY `ventas_iIdCaja_7e9bf3bc_fk_cajas_iIdCaja` (`iIdCaja`),
+  ADD KEY `ventas_iIdEmpleado_85d764ee_fk_empleados_iIdEmpleado` (`iIdEmpleado`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -1010,31 +1074,31 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `auth_group`
 --
 ALTER TABLE `auth_group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `auth_group_permissions`
 --
 ALTER TABLE `auth_group_permissions`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=225;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
 
 --
 -- AUTO_INCREMENT de la tabla `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `auth_user_groups`
 --
 ALTER TABLE `auth_user_groups`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `auth_user_user_permissions`
@@ -1046,103 +1110,121 @@ ALTER TABLE `auth_user_user_permissions`
 -- AUTO_INCREMENT de la tabla `cajas`
 --
 ALTER TABLE `cajas`
-  MODIFY `iIdCaja` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `iIdCaja` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `iIdCliente` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `iIdCliente` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `comprobantes`
 --
 ALTER TABLE `comprobantes`
-  MODIFY `iIdComprobante` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `iIdComprobante` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `comprobante_ventas`
 --
 ALTER TABLE `comprobante_ventas`
-  MODIFY `iIdComprobanteVenta` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `iIdComprobanteVenta` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `detallepedidos`
+--
+ALTER TABLE `detallepedidos`
+  MODIFY `iIdDetallePedido` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `iIdEmpleado` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `iIdEmpleado` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `mesas`
 --
 ALTER TABLE `mesas`
-  MODIFY `iIdMesa` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `iIdMesa` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `iIdPedido` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `iIdPedido` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `iIdProducto` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `iIdProducto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `sucursales`
 --
 ALTER TABLE `sucursales`
-  MODIFY `iIdSucursal` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `iIdSucursal` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_cliente`
+--
+ALTER TABLE `tipo_cliente`
+  MODIFY `iIdTipoCliente` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_comprobante`
 --
 ALTER TABLE `tipo_comprobante`
-  MODIFY `iIdTipoComprobante` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `iIdTipoComprobante` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_empleado`
 --
 ALTER TABLE `tipo_empleado`
-  MODIFY `iIdTipoEmpleado` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `iIdTipoEmpleado` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_movimiento`
+--
+ALTER TABLE `tipo_movimiento`
+  MODIFY `iIdTipoMovimiento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_pedidos`
 --
 ALTER TABLE `tipo_pedidos`
-  MODIFY `iIdTipoPedido` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `iIdTipoPedido` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_productos`
 --
 ALTER TABLE `tipo_productos`
-  MODIFY `iIdTipoProducto` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `iIdTipoProducto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `iIdVenta` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `iIdVenta` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -1179,21 +1261,36 @@ ALTER TABLE `auth_user_user_permissions`
 -- Filtros para la tabla `cajas`
 --
 ALTER TABLE `cajas`
-  ADD CONSTRAINT `cajas_iidempleado_foreign` FOREIGN KEY (`iIdEmpleado`) REFERENCES `empleados` (`iIdEmpleado`),
-  ADD CONSTRAINT `cajas_iidsucursal_foreign` FOREIGN KEY (`iIdSucursal`) REFERENCES `sucursales` (`iIdSucursal`);
+  ADD CONSTRAINT `cajas_iIdEmpleado_cec70c6e_fk_empleados_iIdEmpleado` FOREIGN KEY (`iIdEmpleado`) REFERENCES `empleados` (`iIdEmpleado`),
+  ADD CONSTRAINT `cajas_iIdSucursal_98ce61ac_fk_sucursales_iIdSucursal` FOREIGN KEY (`iIdSucursal`) REFERENCES `sucursales` (`iIdSucursal`),
+  ADD CONSTRAINT `cajas_iIdTipoMovimiento_a636b679_fk_tipo_movi` FOREIGN KEY (`iIdTipoMovimiento`) REFERENCES `tipo_movimiento` (`iIdTipoMovimiento`);
+
+--
+-- Filtros para la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  ADD CONSTRAINT `clientes_iIdTipoCliente_c76f3857_fk_tipo_cliente_iIdTipoCliente` FOREIGN KEY (`iIdTipoCliente`) REFERENCES `tipo_cliente` (`iIdTipoCliente`),
+  ADD CONSTRAINT `clientes_user_id_2e92d62d_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 
 --
 -- Filtros para la tabla `comprobantes`
 --
 ALTER TABLE `comprobantes`
-  ADD CONSTRAINT `comprobantes_iidtipocomprobante_foreign` FOREIGN KEY (`iIdTipoComprobante`) REFERENCES `tipo_comprobante` (`iIdTipoComprobante`);
+  ADD CONSTRAINT `comprobantes_iIdTipoComprobante_2541201e_fk_tipo_comp` FOREIGN KEY (`iIdTipoComprobante`) REFERENCES `tipo_comprobante` (`iIdTipoComprobante`);
 
 --
 -- Filtros para la tabla `comprobante_ventas`
 --
 ALTER TABLE `comprobante_ventas`
-  ADD CONSTRAINT `comprobante_ventas_iidcomprobante_foreign` FOREIGN KEY (`iIdComprobante`) REFERENCES `comprobantes` (`iIdComprobante`),
-  ADD CONSTRAINT `comprobante_ventas_iidventa_foreign` FOREIGN KEY (`iIdVenta`) REFERENCES `ventas` (`iIdVenta`);
+  ADD CONSTRAINT `comprobante_ventas_iIdComprobante_ece15b11_fk_comproban` FOREIGN KEY (`iIdComprobante`) REFERENCES `comprobantes` (`iIdComprobante`),
+  ADD CONSTRAINT `comprobante_ventas_iIdVenta_1269f5cb_fk_ventas_iIdVenta` FOREIGN KEY (`iIdVenta`) REFERENCES `ventas` (`iIdVenta`);
+
+--
+-- Filtros para la tabla `detallepedidos`
+--
+ALTER TABLE `detallepedidos`
+  ADD CONSTRAINT `detallepedidos_iIdPedido_a3684dac_fk_pedidos_iIdPedido` FOREIGN KEY (`iIdPedido`) REFERENCES `pedidos` (`iIdPedido`),
+  ADD CONSTRAINT `detallepedidos_iIdProducto_fad082a6_fk_productos_iIdProducto` FOREIGN KEY (`iIdProducto`) REFERENCES `productos` (`iIdProducto`);
 
 --
 -- Filtros para la tabla `django_admin_log`
@@ -1206,35 +1303,36 @@ ALTER TABLE `django_admin_log`
 -- Filtros para la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  ADD CONSTRAINT `empleados_iidtipoempleado_foreign` FOREIGN KEY (`iIdTipoEmpleado`) REFERENCES `tipo_empleado` (`iIdTipoEmpleado`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `empleados_iIdTipoEmpleado_fd710ebb_fk_tipo_empl` FOREIGN KEY (`iIdTipoEmpleado`) REFERENCES `tipo_empleado` (`iIdTipoEmpleado`),
+  ADD CONSTRAINT `empleados_user_id_bab8bc25_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 
 --
 -- Filtros para la tabla `mesas`
 --
 ALTER TABLE `mesas`
-  ADD CONSTRAINT `mesas_iidsucursal_foreign` FOREIGN KEY (`iIdSucursal`) REFERENCES `sucursales` (`iIdSucursal`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `mesas_iIdSucursal_ff7c3954_fk_sucursales_iIdSucursal` FOREIGN KEY (`iIdSucursal`) REFERENCES `sucursales` (`iIdSucursal`);
 
 --
 -- Filtros para la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  ADD CONSTRAINT `pedidos_iidcliente_foreign` FOREIGN KEY (`iIdCliente`) REFERENCES `clientes` (`iIdCliente`),
-  ADD CONSTRAINT `pedidos_iidempleado_foreign` FOREIGN KEY (`iIdEmpleado`) REFERENCES `empleados` (`iIdEmpleado`),
-  ADD CONSTRAINT `pedidos_iidmesa_foreign` FOREIGN KEY (`iIdMesa`) REFERENCES `mesas` (`iIdMesa`),
-  ADD CONSTRAINT `pedidos_iidtipopedido_foreign` FOREIGN KEY (`iIdTipoPedido`) REFERENCES `tipo_pedidos` (`iIdTipoPedido`);
+  ADD CONSTRAINT `pedidos_iIdCliente_9340b32d_fk_clientes_iIdCliente` FOREIGN KEY (`iIdCliente`) REFERENCES `clientes` (`iIdCliente`),
+  ADD CONSTRAINT `pedidos_iIdEmpleado_0bd663ce_fk_empleados_iIdEmpleado` FOREIGN KEY (`iIdEmpleado`) REFERENCES `empleados` (`iIdEmpleado`),
+  ADD CONSTRAINT `pedidos_iIdMesa_53d383a6_fk_mesas_iIdMesa` FOREIGN KEY (`iIdMesa`) REFERENCES `mesas` (`iIdMesa`),
+  ADD CONSTRAINT `pedidos_iIdTipoPedido_92a39193_fk_tipo_pedidos_iIdTipoPedido` FOREIGN KEY (`iIdTipoPedido`) REFERENCES `tipo_pedidos` (`iIdTipoPedido`);
 
 --
 -- Filtros para la tabla `productos`
 --
 ALTER TABLE `productos`
-  ADD CONSTRAINT `productos_iidtipoproducto_foreign` FOREIGN KEY (`iIdTipoProducto`) REFERENCES `tipo_productos` (`iIdTipoProducto`);
+  ADD CONSTRAINT `productos_iIdTipoProducto_536e6d05_fk_tipo_prod` FOREIGN KEY (`iIdTipoProducto`) REFERENCES `tipo_productos` (`iIdTipoProducto`);
 
 --
 -- Filtros para la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  ADD CONSTRAINT `ventas_iidcaja_foreign` FOREIGN KEY (`iIdCaja`) REFERENCES `cajas` (`iIdCaja`),
-  ADD CONSTRAINT `ventas_iidempleado_foreign` FOREIGN KEY (`iIdEmpleado`) REFERENCES `empleados` (`iIdEmpleado`);
+  ADD CONSTRAINT `ventas_iIdCaja_7e9bf3bc_fk_cajas_iIdCaja` FOREIGN KEY (`iIdCaja`) REFERENCES `cajas` (`iIdCaja`),
+  ADD CONSTRAINT `ventas_iIdEmpleado_85d764ee_fk_empleados_iIdEmpleado` FOREIGN KEY (`iIdEmpleado`) REFERENCES `empleados` (`iIdEmpleado`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
