@@ -45,8 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_bootstrap5',
     'CarritoApp',
-     'loguinApp',
-     'cajas',
+    'loguinApp',
+    'cajas',
+    'clientesApp',
+    'sucursalesApp',
 ]
 
 MIDDLEWARE = [
